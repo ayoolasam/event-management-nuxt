@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sen:wght@400..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Staatliches&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Source Sans 3", "sans-serif";
+  /* font-family: "inter", "sans-serif"; */
+  box-sizing: border-box;
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 24px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    width: 2px;
+    background-color: #d6d6d6;
+    border-radius: 24px;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+html {
+  @apply scroll-smooth scrollbar;
+}
+
+.ctn {
+  @apply px-6 py-6 bg-[#f2f2f2] overflow-y-auto;
+}
+th {
+  @apply p-3 text-sm font-semibold tracking-wide text-left;
+}
+
+/* tr{
+  @apply 
+} */
+
+td {
+  @apply p-3 text-sm  font-medium bg-white text-black border-gray-200 border-b-[1px];
+}
+
+.badge {
+  @apply px-4 text-xs py-[5px] rounded-lg font-medium uppercase tracking-wider bg-opacity-30;
+}
+.badge-green {
+  @apply bg-green-700 text-white;
+}
+.badge-orange {
+  @apply bg-orange-300 text-white;
+}
+
+tbody {
+  @apply border-gray-200 border-2;
+}
