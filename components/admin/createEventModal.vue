@@ -19,6 +19,13 @@
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
           />
         </div>
+        <div class="mt-4">
+          <label class="block">Date</label>
+          <input
+            type="date"
+            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+          />
+        </div>
 
         <div class="mt-4">
           <label class="block">Capacity</label>
@@ -41,6 +48,14 @@
         <div class="mt-4">
           <label class="block">location</label>
           <input
+            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+          />
+        </div>
+
+        <div class="mt-4">
+          <label class="block">Price</label>
+          <input
+            type="text"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
           />
         </div>

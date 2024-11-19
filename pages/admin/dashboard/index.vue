@@ -3,7 +3,7 @@
     <div class="bg-primary text-white py-4 px-4 rounded-xl shadow-lg">
       Welcome Admin!
     </div>
-    <div v-if="loading" class="w-full h-[100px] rounded-md mt-4 skeleton"></div>
+    <div v-if="loading" class="w-full h-[160px] rounded-md mt-4 skeleton"></div>
     <div v-else class="flex gap-[10px] flex-wrap mt-4">
       <cardBox
         Title1="Site"

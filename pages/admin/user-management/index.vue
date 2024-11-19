@@ -15,24 +15,34 @@
         <i class="ri-search-line ml-[-25px] text-gray-500"></i>
       </div>
     </div>
-    <div class="overflow-auto">
+    <div class="overflow-auto no-scrollbar">
       <table class="w-full">
         <thead class="bg-gray-300 border-b-2 border-gray-200">
           <tr>
-            <th>S/No</th>
+            <th>Id</th>
             <th>Name</th>
-            <th>Status</th>
+            <th>Role</th>
             <th>Date Joined</th>
-            <th>Status</th>
+            <!-- <th>Status</th> -->
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(user, index) in users" :key="index">
-            <td>{{ user.username }}</td>
-            <td>{{ user.name }}</td>
+            <td>{{ user._id }}</td>
+            <td class="flex gap-[8px] items-center">
+              <span
+                class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
+              >
+                {{ user.name[0] }} {{ user.name[5] }}
+              </span>
+              <div class="">
+                <p class="font-normal">{{ user.name }}</p>
+                <p class="text-[12px] text-gray-600">{{ user.email }}</p>
+              </div>
+            </td>
             <td>
-              <span class="badge badge-green">{{ user.role }}</span>
+              <span class="font-normal text-gray-600">{{ user.role }}</span>
             </td>
             <td>{{ user.createdAt }}</td>
             <!-- <td>{{ user.dateJoined }}</td> -->
