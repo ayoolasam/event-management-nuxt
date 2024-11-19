@@ -21,7 +21,7 @@
         </div>
 
         <div class="mt-4">
-          <label class="block">slots</label>
+          <label class="block">Capacity</label>
           <input
             type="number"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
@@ -32,7 +32,9 @@
           <select
             class="w-full mt-[10px] border-primary py-[5px] border-[1px] rounded-md"
           >
-            <option>Concert</option>
+            <option v-for="(category, index) in categories" :key="index">
+              {{ category }}
+            </option>
           </select>
         </div>
 
@@ -60,6 +62,29 @@
 
 <script setup>
 const emit = defineEmits(["closeModal"]);
+const categories = ref([
+  "conference",
+  "webinar",
+  "workshop",
+  "seminar",
+  "meetup",
+  "networking",
+  "hackathon",
+  "training",
+  "fundraiser",
+  "party",
+  "concert",
+  "exhibition",
+  "festival",
+  "charity",
+  "sport",
+  "launch",
+  "award",
+  "panel",
+  "roundtable",
+  "retreat",
+  "community",
+]);
 
 const close = () => {
   emit("closeModal");

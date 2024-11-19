@@ -1,9 +1,10 @@
 <template>
-  <div class="ctn h-full">
+  <div class="ctn h-full no-scrollbar">
     <div class="bg-primary text-white py-4 px-4 rounded-xl shadow-lg">
       Welcome Admin!
     </div>
-    <div class="flex gap-[10px] flex-wrap mt-4">
+    <div v-if="loading" class="w-full h-[100px] rounded-md mt-4 skeleton"></div>
+    <div v-else class="flex gap-[10px] flex-wrap mt-4">
       <cardBox
         Title1="Site"
         Title2="Performance"
@@ -14,7 +15,7 @@
       <cardBox
         Title1="Total"
         Title2="Users"
-        Amount="100"
+        :Amount="usersTotal"
         :image="UserCircle"
         Color="Circle"
       />
@@ -28,7 +29,7 @@
       <cardBox
         Title1="Total"
         Title2="Events"
-        Amount="10"
+        :Amount="eventTotal"
         :image="Users"
         Color="user"
       />
@@ -45,12 +46,58 @@ import ChartBar from "../../../assets/images/ChartBarHorizontal.png";
 import Users from "../../../assets/images/Users.png";
 import UserCircle from "../../../assets/images/UserCircle.png";
 import Stack from "../../../assets/images/Stack.png";
+import { useToast } from "maz-ui";
+import axios from "axios";
 // import dataLabels from 'chartjs-plugin-datalabels'
 
 definePageMeta({
   layout: "admin",
 });
-import { ref } from "vue";
+const toast = useToast();
+const usersTotal = ref("");
+const eventTotal = ref("");
+const loading = ref(true);
+
+const getUsers = async () => {
+  let response;
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/users/GetUsers",
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      usersTotal.value = response.data.no_of_users;
+      loading.value = false;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.response.data.message);
+    }
+  }
+};
+
+const getEvents = async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/api/v1/events", {
+      withCredentials: true,
+    });
+
+    if (response) {
+      eventTotal.value = response.data.length;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.response.data.message);
+    }
+  }
+};
 
 const chartOptions = ref({
   chart: {
@@ -80,6 +127,11 @@ const series = ref([
     data: [30, 40, 35, 50, 49, 60, 70, 91],
   },
 ]);
+
+onMounted(() => {
+  getUsers();
+  getEvents();
+});
 </script>
 
 <style scoped></style>

@@ -20,13 +20,13 @@
     </div>
     <div
       :class="{
-        'mt-12': collapse,
+        'mt-12 px-[5px]': collapse,
       }"
       class="w-full flex items-center justify-center transition-all duration-200"
     >
       <img
         :class="{
-          'w-[36px] h-[24px]': collapse,
+          'w-[36px] h-[30px]': collapse,
         }"
         class="w-[70px] h-[40px]"
         src="../../assets/images/logo-white.png"
@@ -129,6 +129,4 @@ const options = ref([
 ]);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

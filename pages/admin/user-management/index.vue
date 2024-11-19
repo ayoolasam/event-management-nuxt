@@ -29,13 +29,13 @@
         </thead>
         <tbody>
           <tr v-for="(user, index) in users" :key="index">
-            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
             <td>{{ user.name }}</td>
             <td>
-              <span class="badge badge-green">{{ user.active }}</span>
+              <span class="badge badge-green">{{ user.role }}</span>
             </td>
-            <td>{{ user.dateJoined }}</td>
-            <td>{{ user.dateJoined }}</td>
+            <td>{{ user.createdAt }}</td>
+            <!-- <td>{{ user.dateJoined }}</td> -->
             <td class="">
               <i
                 @click="showMore(index)"
@@ -67,85 +67,114 @@
 
 <script setup>
 import { MazBtn } from "maz-ui/components";
+import axios from "axios";
+import { useToast } from "maz-ui";
+
+definePageMeta({
+  layout: "admin",
+});
 const show = ref(false);
 const showIndex = ref("");
+const toast = useToast();
 
 const showMore = (index) => {
   show.value = !show.value;
   showIndex.value = index;
 };
-const users = ref([
-  {
-    id: 1,
-    name: "John Doe",
-    active: true,
-    dateJoined: "2024-01-01",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
+const users = ref([]);
+// const users = ref([
+//   {
+//     id: 1,
+//     name: "John Doe",
+//     active: true,
+//     dateJoined: "2024-01-01",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
 
-  {
-    id: 2,
-    name: "Jane Smith",
-    active: false,
-    dateJoined: "2023-12-15",
-  },
-  {
-    id: 3,
-    name: "Samuel Jackson",
-    active: true,
-    dateJoined: "2024-03-10",
-  },
-  {
-    id: 4,
-    name: "Emily Davis",
-    active: false,
-    dateJoined: "2024-02-20",
-  },
-  {
-    id: 5,
-    name: "Michael Johnson",
-    active: true,
-    dateJoined: "2024-03-15",
-  },
-]);
+//   {
+//     id: 2,
+//     name: "Jane Smith",
+//     active: false,
+//     dateJoined: "2023-12-15",
+//   },
+//   {
+//     id: 3,
+//     name: "Samuel Jackson",
+//     active: true,
+//     dateJoined: "2024-03-10",
+//   },
+//   {
+//     id: 4,
+//     name: "Emily Davis",
+//     active: false,
+//     dateJoined: "2024-02-20",
+//   },
+//   {
+//     id: 5,
+//     name: "Michael Johnson",
+//     active: true,
+//     dateJoined: "2024-03-15",
+//   },
+// ]);
 
-definePageMeta({
-  layout: "admin",
+const getUsers = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/users/GetUsers",
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      users.value = response.data.data.users;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.message);
+    }
+  }
+};
+
+onMounted(() => {
+  getUsers();
 });
 </script>
 
