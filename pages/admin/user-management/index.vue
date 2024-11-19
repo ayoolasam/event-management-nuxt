@@ -36,8 +36,27 @@
             </td>
             <td>{{ user.dateJoined }}</td>
             <td>{{ user.dateJoined }}</td>
-            <td>
-              <i class="ri-more-2-fill"></i>
+            <td class="">
+              <i
+                @click="showMore(index)"
+                class="cursor-pointer ri-more-2-fill relative"
+              >
+                <div
+                  v-if="show && showIndex === index"
+                  class="w-[100px] absolute top-[5px] bg-white shadow-md font-medium left-4 rounded-lg"
+                >
+                  <p
+                    class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-gray-400"
+                  >
+                    View Details
+                  </p>
+                  <p
+                    class="w-full rounded-br-lg rounded-bl-lg text-center py-[5px] hover:bg-gray-400"
+                  >
+                    Delete User
+                  </p>
+                </div>
+              </i>
             </td>
           </tr>
         </tbody>
@@ -48,6 +67,13 @@
 
 <script setup>
 import { MazBtn } from "maz-ui/components";
+const show = ref(false);
+const showIndex = ref("");
+
+const showMore = (index) => {
+  show.value = !show.value;
+  showIndex.value = index;
+};
 const users = ref([
   {
     id: 1,

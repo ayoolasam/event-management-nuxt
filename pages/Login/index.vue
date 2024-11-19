@@ -30,6 +30,7 @@
                 class="px-4 py-[8px] shadow-sm rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
                 type="text"
                 placeholder=" Enter Your Email"
+                v-model="email"
               />
             </div>
             <div
@@ -53,15 +54,15 @@
           <div class="flex items-center flex-col mt-8">
             <button
               class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium hover:translate-y-4 transition-all duration-150"
+              @click="LogIn"
             >
               Sign In
             </button>
             <NuxtLink :to="'/Register'">
               <span class="text-gray-600 text-[14px]"
-              >Dont Have an Account Signup?</span
-            >
+                >Dont Have an Account Signup?</span
+              >
             </NuxtLink>
-          
           </div>
         </div>
       </div>
@@ -70,11 +71,42 @@
 </template>
 
 <script setup>
+import axios from "axios";
+import { useToast } from "maz-ui";
 const password = ref("");
+const email = ref("");
 const show = ref(false);
+const toast = useToast();
+const userStore = useUserStore();
 
 const showPassword = () => {
   show.value = !show.value;
+};
+
+const LogIn = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/v1/users/login",
+      {
+        password: password.value,
+        email: email.value,
+      },
+      {
+        withCredentials: true, // Required for cookies
+      }
+    );
+
+    if (response) {
+      userStore.loggedIn = true;
+      toast.success("Logged In Successfully");
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.response.data.message);
+    }
+  }
 };
 </script>
 

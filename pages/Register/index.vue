@@ -24,6 +24,7 @@
                 class="px-4 shadow-sm py-[8px] rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
                 type="text"
                 placeholder="Enter your Name"
+                v-model="name"
               />
             </div>
             <div class="form-group px-8 w-full flex flex-col gap-[5px]">
@@ -32,6 +33,7 @@
                 class="px-4 shadow-sm py-[8px] rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
                 type="text"
                 placeholder="Enter your username"
+                v-model="username"
               />
             </div>
             <div class="form-group px-8 w-full flex flex-col gap-[5px]">
@@ -40,6 +42,7 @@
                 class="px-4 py-[8px] shadow-sm rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
                 type="text"
                 placeholder=" Enter Your Email"
+                v-model="email"
               />
             </div>
             <div
@@ -63,6 +66,7 @@
           <div class="flex items-center flex-col mt-8">
             <button
               class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium hover:translate-y-4 transition-all duration-150"
+              @click="Register"
             >
               Create Account
             </button>
@@ -79,11 +83,40 @@
 </template>
 
 <script setup>
+import axios from "axios";
+
 const password = ref("");
 const show = ref(false);
+const name = ref("");
+const username = ref("");
+const email = ref("");
 
 const showPassword = () => {
   show.value = !show.value;
+};
+
+const Register = async () => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/v1/users/register",
+      {
+        name: name.value,
+        username: username.value,
+        password: password.value,
+        email: email.value,
+      }
+    );
+
+    if (response) {
+      console.log(response);
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.response.data.message);
+    }
+  }
 };
 </script>
 

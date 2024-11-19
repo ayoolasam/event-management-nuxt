@@ -26,7 +26,7 @@
     >
       <img
         :class="{
-          'w-[37px] h-[19px]': collapse,
+          'w-[36px] h-[24px]': collapse,
         }"
         class="w-[70px] h-[40px]"
         src="../../assets/images/logo-white.png"
@@ -129,4 +129,6 @@ const options = ref([
 ]);
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -17,7 +17,15 @@ export default defineNuxtConfig({
 
 
 
-  modules:['maz-ui/nuxt'],
+  modules:['maz-ui/nuxt',
+    [
+    "@pinia/nuxt",
+    {
+      autoImports: ["defineStore", "acceptHMRUpdate"],
+    },
+  ],
+    'pinia-plugin-persistedstate/nuxt',
+  ],
 
   mazUi: {
     injectComponents: true,
@@ -39,6 +47,13 @@ export default defineNuxtConfig({
   css: ['~/assets/main.css',
      "remixicon/fonts/remixicon.css",
   ],
+
+
+
+
+  imports: {
+    dirs: ["stores"],
+  },
 
   postcss: {
     plugins: {
