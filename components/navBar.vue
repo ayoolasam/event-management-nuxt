@@ -6,7 +6,7 @@
       <div class="class flex flex-col">
         <p class="font-semi-bold text-[16px]">{{ userStore.user.name }}</p>
         <span class="font-normal text-[14px] text-gray-500">{{
-          userStore.role
+          userStore.userRole
         }}</span>
       </div>
       <div class="flex gap-[8px] items-center">
@@ -35,7 +35,7 @@ const getMe = async () => {
 
     if (response) {
       userStore.user = response.data.data.user;
-      userStore.role = response.data.data.user.role;
+      userStore.userRole = response.data.data.user.role;
     }
   } catch (e) {
     if (e.message.includes("Network")) {

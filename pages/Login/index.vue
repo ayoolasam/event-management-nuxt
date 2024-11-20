@@ -97,8 +97,14 @@ const LogIn = async () => {
     );
 
     if (response) {
+      await userStore.fetchUserDetails();
       userStore.loggedIn = true;
       toast.success("Logged In Successfully");
+      if (userStore.userRole === "Admin") {
+        navigateTo("/admin/dashboard");
+      } else {
+        navigateTo("/user/dashboard");
+      }
     }
   } catch (e) {
     if (e.message.includes("Network")) {
@@ -115,8 +121,8 @@ const LogIn = async () => {
   .left {
     display: none;
   }
-.cont{
-  width: 500px;
-}
+  .cont {
+    width: 500px;
+  }
 }
 </style>
