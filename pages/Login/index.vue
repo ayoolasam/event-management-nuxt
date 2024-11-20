@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center h-screen bg-primary">
-    <div class="flex w-[950px] h-[500px] shadow-2xl">
+    <div class="flex w-[950px] cont h-[500px] shadow-2xl">
       <div class="flex-1 left">
         <img
           class="h-full w-full rounded-tl-lg rounded-bl-lg"
@@ -115,5 +115,8 @@ const LogIn = async () => {
   .left {
     display: none;
   }
+.cont{
+  width: 500px;
+}
 }
 </style>

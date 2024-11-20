@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center h-screen bg-primary">
-    <div class="flex w-[950px] h-[550px] shadow-2xl">
+    <div class="flex w-[950px] cont h-[550px] shadow-2xl">
       <div class="flex-1 left">
         <img
           class="h-full w-full rounded-tl-lg rounded-bl-lg"
@@ -125,6 +125,9 @@ const Register = async () => {
   .left {
     display: none;
     width: 300px;
+  }
+  .cont {
+    width: 500px;
   }
 }
 </style>
