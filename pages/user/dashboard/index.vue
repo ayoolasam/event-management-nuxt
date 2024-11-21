@@ -1,7 +1,11 @@
 <template>
-  <div></div>
+  <div>useerrrr</div>
 </template>
 
-<script setup></script>
+<script setup>
+definePageMeta({
+  layout: "user",
+});
+</script>
 
 <style lang="scss" scoped></style>
