@@ -44,7 +44,7 @@
             <td>
               <span class="font-normal text-gray-600">{{ user.role }}</span>
             </td>
-            <td>{{ user.createdAt }}</td>
+            <td>{{ formatDate(user.createdAt) }}</td>
             <!-- <td>{{ user.dateJoined }}</td> -->
             <td class="">
               <i
@@ -161,6 +161,16 @@ const users = ref([]);
 //     dateJoined: "2024-03-15",
 //   },
 // ]);
+
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long', // "short" for abbreviated month
+    day: '2-digit',
+  });
+};
 
 const getUsers = async () => {
   try {

@@ -65,7 +65,7 @@
           </div>
           <div class="flex items-center flex-col mt-8">
             <button
-              class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium hover:translate-y-4 transition-all duration-150"
+              class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium  transition-all duration-150"
               @click="Register"
             >
               Create Account
@@ -121,13 +121,31 @@ const Register = async () => {
 </script>
 
 <style scoped>
-@media (max-width: 630px) {
+@media (max-width: 984px) {
   .left {
     display: none;
-    width: 300px;
   }
   .cont {
     width: 500px;
+  }
+}
+
+
+
+@media (max-width: 560px) {
+  .left {
+    display: none;
+  }
+  .cont {
+    width: 400px;
+  }
+}
+@media (max-width: 560px) {
+  .left {
+    display: none;
+  }
+  .cont {
+    width: 340px;
   }
 }
 </style>
