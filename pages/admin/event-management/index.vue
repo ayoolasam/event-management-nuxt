@@ -23,9 +23,17 @@
         :key="index"
         class="mt-4 relative"
       >
-        <div class="absolute right-[10px] flex gap-4 top-4 px-8 z-50">
+        <div
+          class="absolute right-[10px] cursor-pointer flex gap-4 top-4 px-8 z-40"
+        >
           <i class="ri-edit-line"></i>
-          <i class="ri-delete-bin-line text-red-400"></i>
+          <i
+            @click="
+              close = true;
+              selectedEvent = event;
+            "
+            class="ri-delete-bin-line text-red-400"
+          ></i>
         </div>
         <MazCard
           :block="true"
@@ -51,24 +59,38 @@
     </div>
 
     <createEventModal v-if="create" @closeModal="toggleCreate" />
+    <ctaModal
+      v-if="close"
+      title="Event"
+      @closeModal="closeCta"
+      @delete="deleteEvent"
+    />
   </div>
 </template>
 
 <script setup>
 import createEventModal from "~/components/admin/createEventModal.vue";
 import { MazCard } from "maz-ui/components";
+import ctaModal from "~/components/ctaModal.vue";
 import { useToast } from "maz-ui";
 import axios from "axios";
 const create = ref(false);
 const toast = useToast();
 const events = ref([]);
 const loading = ref(true);
+const close = ref(false);
+const selectedEvent = ref({});
+const dLoading = ref(false);
 const toggleCreate = () => {
   create.value = !create.value;
 };
 definePageMeta({
   layout: "admin",
 });
+
+const closeCta = () => {
+  close.value = !close.value;
+};
 
 const getEvents = async () => {
   try {
@@ -80,6 +102,31 @@ const getEvents = async () => {
     if (response) {
       events.value = response.data.data.events;
       loading.value = false;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.message);
+    }
+  }
+};
+
+const deleteEvent = async () => {
+  try {
+    dLoading.value = true;
+    const response = await axios.delete(
+      `http://localhost:5000/api/v1/events/delete/${selectedEvent.value._id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      dLoading.value = false;
+      toast.success("Event Deleted");
+      closeCta();
+      getEvents();
     }
   } catch (e) {
     if (e.message.includes("Network")) {

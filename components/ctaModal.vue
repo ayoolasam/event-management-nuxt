@@ -1,27 +1,34 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="w-[50%] py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[40%] bg-white rounded-md"
+      class="mw-[27%] py-4 no-scrollbar overflow-y-auto flex flex-col justify-between px-8 modal-content h-[40%] bg-white rounded-md"
     >
-      <!-- <div
-        class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
+      <div
+        class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700  text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
       >
         <i @click="close" class="ri-close-line text-white"></i>
       </div>
-      <div class="mt-12">
-        <p class="font-semibold text-[25px]">Create Event</p>
-        <span>Fill in the details below to create an Event</span>
+      <div class="mt-12 text-center">
+        <p class="font-semibold text-[25px]">Delete</p>
+        <span>Are you sure you want to delete this {{ title }}</span>
       </div>
-      <div class="mt-4">
+      <!-- <div class="mt-4">
         <div>
           <label class="block">Name</label>
           <input
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
           />
         </div>
+        <div class="mt-4">
+          <label class="block">Date</label>
+          <input
+            type="date"
+            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+          />
+        </div>
 
         <div class="mt-4">
-          <label class="block">slots</label>
+          <label class="block">Capacity</label>
           <input
             type="number"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
@@ -32,13 +39,23 @@
           <select
             class="w-full mt-[10px] border-primary py-[5px] border-[1px] rounded-md"
           >
-            <option>Concert</option>
+            <option v-for="(category, index) in categories" :key="index">
+              {{ category }}
+            </option>
           </select>
         </div>
 
         <div class="mt-4">
           <label class="block">location</label>
           <input
+            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+          />
+        </div>
+
+        <div class="mt-4">
+          <label class="block">Price</label>
+          <input
+            type="text"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
           />
         </div>
@@ -54,12 +71,39 @@
           </button>
         </div>
       </div> -->
+      <div class="justify-center flex">
+        <button @click="emit('delete')" class="bg-primary text-white rounded-xl w-[60%] py-[10px]">Delete</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const emit = defineEmits(["closeModal"]);
+const emit = defineEmits(["closeModal","delete"]);
+const props = defineProps(["title"])
+const categories = ref([
+  "conference",
+  "webinar",
+  "workshop",
+  "seminar",
+  "meetup",
+  "networking",
+  "hackathon",
+  "training",
+  "fundraiser",
+  "party",
+  "concert",
+  "exhibition",
+  "festival",
+  "charity",
+  "sport",
+  "launch",
+  "award",
+  "panel",
+  "roundtable",
+  "retreat",
+  "community",
+]);
 
 const close = () => {
   emit("closeModal");

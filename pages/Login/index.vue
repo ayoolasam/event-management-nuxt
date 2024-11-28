@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-primary">
+  <div class="flex items-center font-poppins  justify-center h-screen bg-primary">
     <div class="flex w-[950px] cont h-[460px] shadow-2xl">
       <div class="flex-1 left">
         <img
@@ -60,7 +60,8 @@
                 class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium transition-all duration-150"
                 @click="LogIn"
               >
-                Sign In
+              <MazSpinner v-if="loading" color="white" />
+                <span v-else>Sign In</span>
               </button>
               <NuxtLink :to="'/Register'">
                 <span class="text-gray-600 text-[14px]"
@@ -83,13 +84,17 @@ const email = ref("");
 const show = ref(false);
 const toast = useToast();
 const userStore = useUserStore();
+const loading = ref(false)
 
 const showPassword = () => {
   show.value = !show.value;
 };
 
 const LogIn = async () => {
+
+  let response;
   try {
+    loading.value = true
     const response = await axios.post(
       "http://localhost:5000/api/v1/users/login",
       {
@@ -102,8 +107,10 @@ const LogIn = async () => {
     );
 
     if (response) {
+      
       await userStore.fetchUserDetails();
       userStore.loggedIn = true;
+      loading.value = false
       toast.success("Logged In Successfully");
       if (userStore.userRole === "Admin") {
         navigateTo("/admin/dashboard");

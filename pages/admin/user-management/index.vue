@@ -53,7 +53,7 @@
               >
                 <div
                   v-if="show && showIndex === index"
-                  class="w-[100px] absolute top-[5px] bg-white shadow-md font-medium left-4 rounded-lg"
+                  class="w-[100px] absolute top-[5px] bg-white shadow-md  font-medium  rounded-lg"
                 >
                   <p
                     class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-gray-400"
@@ -162,13 +162,12 @@ const users = ref([]);
 //   },
 // ]);
 
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long', // "short" for abbreviated month
-    day: '2-digit',
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long", // "short" for abbreviated month
+    day: "2-digit",
   });
 };
 
