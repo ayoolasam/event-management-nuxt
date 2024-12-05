@@ -26,7 +26,7 @@
     >
       <img
         :class="{
-          'w-[36px] h-[30px]': collapse,
+          'w-[30px] h-[20px]': collapse,
         }"
         class="w-[70px] h-[40px]"
         src="../../assets/images/logo-white.png"
@@ -36,6 +36,9 @@
     <div class="link-section overflow-y-auto no-scrollbar h-[65%]">
       <ul class="transition-all duration-500">
         <li
+          :class="{
+            'flex justify-center': collapse,
+          }"
           v-for="(item, index) in sideBarLinks"
           :key="index"
           class="text-white flex py-4 items-center px-4 w-full hover:bg-white transition-all hover:text-primary duration-500 ease-in-out cursor-pointer"
@@ -56,6 +59,9 @@
     <div class="link-section">
       <ul class="">
         <li
+          :class="{
+            'flex justify-center': collapse,
+          }"
           v-for="(item, index) in options"
           :key="index"
           class="text-white flex py-4 items-center px-4 w-full hover:bg-white transition-all hover:text-primary duration-500 ease-in-out"

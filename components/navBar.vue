@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="shadow-md w-full py-4 flex justify-end px-8 sticky z-50 top-0 bg-white"
-  >
+  <nav class="w-full py-[7px] flex justify-end px-8 bordesign bg-white">
     <div
       @click="triggerLogOut"
       class="user-box flex gap-[10px] items-center relative cursor-pointer"

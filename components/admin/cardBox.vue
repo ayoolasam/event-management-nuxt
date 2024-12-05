@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-[10px] bg-white flex flex-1 flex-col justify-between py-[10px] px-[15px] shadow-lg font-Rubik text-[#033E96]"
+    class="rounded-[10px] bg-white flex flex-1 flex-col justify-between py-[10px] px-[15px] shadow-lg font-Rubik text-[#033E96] bordesign"
   >
     <div class="font-Rubik text-[20px] font-normal">
       <p>{{ Title1 }}</p>

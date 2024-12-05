@@ -36,7 +36,7 @@ html {
 }
 
 .ctn {
-  @apply px-6 py-6 bg-[#f2f2f2] overflow-y-auto;
+  @apply px-6 py-6;
 }
 th {
   @apply p-3 text-sm font-semibold tracking-wide text-left;
@@ -73,4 +73,8 @@ tbody {
   100% {
     background-color: hsl(200, 20%, 95%);
   }
+}
+
+.bordesign {
+  @apply border-[1px] border-borderColor;
 }

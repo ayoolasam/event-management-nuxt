@@ -48,6 +48,7 @@
           <template #content>
             <p class="maz-text-muted" style="margin: 0">
               {{ event.description }}
+
             </p>
             <div class="flex gap-[5px] text-primary">
               <i class="ri-map-pin-line"></i>
@@ -58,12 +59,13 @@
       </div>
     </div>
 
-    <createEventModal v-if="create" @closeModal="toggleCreate" />
+    <createEventModal v-if="create" @closeModal="toggleCreate" @update="getEvents"/>
     <ctaModal
       v-if="close"
       title="Event"
       @closeModal="closeCta"
       @delete="deleteEvent"
+      
     />
   </div>
 </template>

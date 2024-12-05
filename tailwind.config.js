@@ -11,11 +11,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        borderColor:"#f2f2f2",
         primary: {
-          DEFAULT: "#ac3b61",
+          
+          DEFAULT: "#1f2833",
           light: "#81C784", // Lighter shade
           dark: "#388E3C", // Darker shade
+
         },
+        
       },
       fontFamily: {
         poppins: ['"Poppins"', "serif"], // Adding Roboto as an example

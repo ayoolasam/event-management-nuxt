@@ -29,7 +29,7 @@
         </thead>
         <tbody>
           <tr v-for="(user, index) in users" :key="index">
-            <td>{{ user._id }}</td>
+            <td class="text-gray-600 text-md">{{ user.uniqueID }}</td>
             <td class="flex gap-[8px] items-center">
               <span
                 class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
@@ -53,7 +53,7 @@
               >
                 <div
                   v-if="show && showIndex === index"
-                  class="w-[100px] absolute top-[5px] bg-white shadow-md  font-medium  rounded-lg"
+                  class="w-[100px] absolute top-[5px] bg-white shadow-md font-medium rounded-lg"
                 >
                   <p
                     class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-gray-400"

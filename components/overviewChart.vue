@@ -53,7 +53,7 @@ export default {
 </script>
 
 <template>
-  <div class="rounded-xl shadow bg-white cursor-pointer">
+  <div class="rounded-xl shadow bg-white cursor-pointer bordesign">
     <div
       class="flex items-center justify-between px-6 py-3 font-[500] text-[18px] border-b"
     >

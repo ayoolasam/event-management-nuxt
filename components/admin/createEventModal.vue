@@ -17,6 +17,7 @@
           <label class="block">Name</label>
           <input
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+            v-model="name"
           />
         </div>
         <div class="mt-4">
@@ -24,6 +25,7 @@
           <input
             type="date"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+            v-model="date"
           />
         </div>
 
@@ -32,12 +34,14 @@
           <input
             type="number"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+            v-model="capacity"
           />
         </div>
         <div class="mt-4">
           <label class="block">Category</label>
           <select
             class="w-full mt-[10px] border-primary py-[5px] border-[1px] rounded-md"
+            v-model="category"
           >
             <option v-for="(category, index) in categories" :key="index">
               {{ category }}
@@ -49,6 +53,7 @@
           <label class="block">location</label>
           <input
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+            v-model="location"
           />
         </div>
 
@@ -57,17 +62,23 @@
           <input
             type="text"
             class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
+            v-model="price"
           />
         </div>
         <div class="mt-4">
           <label class="block">Description</label>
           <textarea
             class="w-full px-4 mt-[10px] py-8 focus:outline-none rounded-md bg-gray-300"
+            v-model="description"
           />
         </div>
         <div class="flex justify-center items-center mt-8">
-          <button class="px-20 text-white rounded-lg bg-primary py-[10px]">
-            Create Event
+          <button
+            class="px-20 text-white rounded-lg bg-primary py-[10px]"
+            @click="createEvent"
+          >
+            <MazSpinner v-if="loading" color="white" />
+            <span v-else>Create Event</span>
           </button>
         </div>
       </div>
@@ -76,7 +87,18 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["closeModal"]);
+import { useToast } from "maz-ui";
+import axios from "axios";
+const emit = defineEmits(["closeModal", "update"]);
+const toast = useToast();
+const name = ref("");
+const date = ref("");
+const capacity = ref(null);
+const price = ref(null);
+const location = ref("");
+const loading = ref(false);
+const category = ref("");
+const description = ref("");
 const categories = ref([
   "conference",
   "webinar",
@@ -103,6 +125,46 @@ const categories = ref([
 
 const close = () => {
   emit("closeModal");
+};
+
+const updatePage = () => {
+  emit("update");
+};
+
+const createEvent = async () => {
+  loading.value = true;
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/v1/events/create",
+      {
+        name: name.value,
+        date: date.value,
+        capacity: capacity.value,
+        category: category.value,
+        location: location.value,
+        price: price.value,
+        description: description.value,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      toast.success("Event Created");
+      loading.value = false;
+
+      close();
+      updatePage();
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      console.log(e.message);
+      toast.error(e.message);
+    }
+  }
 };
 </script>
 
