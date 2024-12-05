@@ -7,7 +7,7 @@
       <div
         v-if="logOut"
         @click="LogOut"
-        class="shadow-lg cursor-pointer w-[100px] font-semibold absolute bg-[#f2f1f1] left-12 top-12 py-[5px] text-center rounded-md"
+        class="shadow-lg cursor-pointer w-[100px] text-subText font-semibold absolute bordesign left-12 top-12 py-[5px] text-center rounded-md"
       >
         Log Out
       </div>

@@ -4,7 +4,7 @@
       <h1 class="font-semibold text-[28px]">Event Management</h1>
       <div
         @click="toggleCreate"
-        class="bg-primary hover:bg-white cursor-pointer hover:text-primary text-white px-8 rounded-md shadow-md text-center py-[5px]"
+        class="bg-primary cursor-pointer text-white px-8 rounded-md shadow-md text-center py-[5px]"
       >
         Create Event
       </div>
@@ -26,7 +26,8 @@
         <div
           class="absolute right-[10px] cursor-pointer flex gap-4 top-4 px-8 z-40"
         >
-          <i class="ri-edit-line"></i>
+          <i class="ri-edit-line" @click="editModal = true;
+          selectedEvent = event"></i>
           <i
             @click="
               close = true;
@@ -48,7 +49,6 @@
           <template #content>
             <p class="maz-text-muted" style="margin: 0">
               {{ event.description }}
-
             </p>
             <div class="flex gap-[5px] text-primary">
               <i class="ri-map-pin-line"></i>
@@ -59,19 +59,26 @@
       </div>
     </div>
 
-    <createEventModal v-if="create" @closeModal="toggleCreate" @update="getEvents"/>
+    <createEventModal
+      v-if="create"
+      @closeModal="toggleCreate"
+      @update="getEvents"
+    />
     <ctaModal
       v-if="close"
       title="Event"
       @closeModal="closeCta"
       @delete="deleteEvent"
-      
+    />
+    <EditEvent v-if="editModal" @closeModal="editModal = false"
+    :event="selectedEvent"
     />
   </div>
 </template>
 
 <script setup>
 import createEventModal from "~/components/admin/createEventModal.vue";
+import EditEvent from "~/components/admin/EditEvent.vue";
 import { MazCard } from "maz-ui/components";
 import ctaModal from "~/components/ctaModal.vue";
 import { useToast } from "maz-ui";
@@ -82,6 +89,7 @@ const events = ref([]);
 const loading = ref(true);
 const close = ref(false);
 const selectedEvent = ref({});
+const editModal = ref(false);
 const dLoading = ref(false);
 const toggleCreate = () => {
   create.value = !create.value;

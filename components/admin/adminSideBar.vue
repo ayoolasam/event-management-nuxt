@@ -125,13 +125,13 @@ const options = ref([
   {
     text: "Profile",
     icon: "ri-feedback-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "admin-profile" },
   },
-  {
-    text: "Log Out",
-    icon: "ri-logout-box-line",
-    to: { name: "admin-dashboard" },
-  },
+  // {
+  //   text: "Log Out",
+  //   icon: "ri-logout-box-line",
+  //   to: { name: "admin-dashboard" },
+  // },
 ]);
 </script>
 

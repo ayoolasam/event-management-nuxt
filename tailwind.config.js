@@ -12,6 +12,8 @@ export default {
     extend: {
       colors: {
         borderColor:"#f2f2f2",
+        subText :"#9f9e9f",
+        tableh:"#364155",
         primary: {
           
           DEFAULT: "#1f2833",

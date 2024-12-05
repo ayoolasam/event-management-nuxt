@@ -39,7 +39,7 @@ html {
   @apply px-6 py-6;
 }
 th {
-  @apply p-3 text-sm font-semibold tracking-wide text-left;
+  @apply p-3 text-sm font-semibold tracking-wide text-left text-tableh;
 }
 
 /* tr{
@@ -47,7 +47,10 @@ th {
 } */
 
 td {
-  @apply p-3 text-sm  font-medium bg-white text-black border-gray-200 border-b-[1px];
+  @apply p-3   font-medium bg-white text-xs ;
+}
+tr{
+  @apply bordesign
 }
 
 .badge {
@@ -61,7 +64,7 @@ td {
 }
 
 tbody {
-  @apply border-gray-200 border-2;
+  @apply border-gray-200 ;
 }
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;

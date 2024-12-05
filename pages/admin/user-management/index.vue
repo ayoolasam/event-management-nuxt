@@ -2,14 +2,12 @@
   <div class="h-full ctn">
     <h1 class="font-bold text-[25px]">Users</h1>
 
-    <div
-      class="mt-4 flex justify-between w-full rounded-tl-lg rounded-tr-lg bg-gray-400 p-3"
-    >
-      <span class="font-medium text-2xs text-gray-200">Users Table</span>
+    <div class="mt-4 flex justify-between w-full rounded-tl-lg bordesign p-3">
+      <span class="font-medium text-2xs text-tableh">Users Table</span>
       <div class="search-bar flex items-center w-[40%]">
         <input
           type="text"
-          class="w-[85%] px-[10px] py-[3px] bg-white placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500"
+          class="w-[85%] px-[10px] py-[3px] bordesign bg-[#f2f2f2] placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500"
           placeholder="Search for Users.."
         />
         <i class="ri-search-line ml-[-25px] text-gray-500"></i>
@@ -17,13 +15,14 @@
     </div>
     <div class="overflow-auto no-scrollbar">
       <table class="w-full">
-        <thead class="bg-gray-300 border-b-2 border-gray-200">
+        <thead class="bg-[#f2f2f2]">
           <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Name</th>
+            <th>Status</th>
             <th>Role</th>
             <th>Date Joined</th>
-            <!-- <th>Status</th> -->
+
             <th>Actions</th>
           </tr>
         </thead>
@@ -41,6 +40,11 @@
                 <p class="text-[12px] text-gray-600">{{ user.email }}</p>
               </div>
             </td>
+
+            <td class="">
+              <span class="badge-green badge"> {{ user.status }}</span>
+            </td>
+
             <td>
               <span class="font-normal text-gray-600">{{ user.role }}</span>
             </td>
@@ -53,13 +57,16 @@
               >
                 <div
                   v-if="show && showIndex === index"
-                  class="w-[100px] absolute top-[5px] bg-white shadow-md font-medium rounded-lg"
+                  class="w-[130px] absolute top-[5px] bordesign bg-white text-[16px] shadow-md font-normal rounded-lg"
                 >
-                  <p
-                    class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-gray-400"
-                  >
-                    View Details
-                  </p>
+                  <NuxtLink :to="`/admin/user-management/${user._id}`">
+                    <p
+                      class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-gray-400"
+                    >
+                      View Details
+                    </p>
+                  </NuxtLink>
+
                   <p
                     class="w-full rounded-br-lg rounded-bl-lg text-center py-[5px] hover:bg-gray-400"
                   >

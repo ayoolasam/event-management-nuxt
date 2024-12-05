@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="mw-[27%] py-4 no-scrollbar overflow-y-auto flex flex-col justify-between px-8 modal-content h-[40%] bg-white rounded-md"
+      class="mw-[27%] py-4 no-scrollbar overflow-y-auto flex flex-col  px-8 modal-content h-[35%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700  text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -71,7 +71,7 @@
           </button>
         </div>
       </div> -->
-      <div class="justify-center flex">
+      <div class="justify-center flex mt-8">
         <button @click="emit('delete')" class="bg-primary text-white rounded-xl w-[60%] py-[10px]">Delete</button>
       </div>
     </div>

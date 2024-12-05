@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="w-[30%]  py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
+      class="w-[30%] py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -10,8 +10,8 @@
         <i class="ri-close-line text-white"></i>
       </div>
       <div class="mt-12">
-        <p class="font-semibold text-[25px]">Create Event</p>
-        <span>Fill in the details below to create an Event</span>
+        <p class="font-semibold text-[25px]">Edit Event</p>
+        <span>Fill in the details below to edit an Event</span>
       </div>
       <div class="mt-4">
         <div>
@@ -75,12 +75,12 @@
         </div>
         <div class="flex justify-center items-center mt-8 h-[50px]">
           <button
-            class="px-20 h-full text-white rounded-lg w-full flex items-center focus:outline-none justify-center bg-primary "
+            class="px-20 h-full text-white rounded-lg w-full flex items-center focus:outline-none justify-center bg-primary"
             @click="createEvent"
             :disabled="!name || !description || !category"
           >
             <MazSpinner class="h-[40px]" v-if="loading" color="white" />
-            <span v-else>Create Event</span>
+            <span v-else>Edit Event</span>
           </button>
         </div>
       </div>
@@ -92,15 +92,16 @@
 import { useToast } from "maz-ui";
 import axios from "axios";
 const emit = defineEmits(["closeModal", "update"]);
+const props = defineProps(["event"]);
 const toast = useToast();
-const name = ref("");
-const date = ref("");
-const capacity = ref(null);
-const price = ref(null);
-const location = ref("");
+const name = ref(props.event.name);
+const date = ref(props.event.date);
+const capacity = ref(props.event.capacity);
+const price = ref(props.event.price);
+const location = ref(props.event.location);
 const loading = ref(false);
-const category = ref("");
-const description = ref("");
+const category = ref(props.event.category);
+const description = ref(props.event.description);
 const categories = ref([
   "conference",
   "webinar",
