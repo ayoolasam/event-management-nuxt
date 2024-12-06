@@ -61,14 +61,14 @@
                 >
                   <NuxtLink :to="`/admin/user-management/${user._id}`">
                     <p
-                      class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-gray-400"
+                      class="w-full rounded-tr-lg rounded-tl-lg text-center py-[5px] border-b hover:bg-[#f2f2f2]"
                     >
                       View Details
                     </p>
                   </NuxtLink>
 
                   <p
-                    class="w-full rounded-br-lg rounded-bl-lg text-center py-[5px] hover:bg-gray-400"
+                    class="w-full rounded-br-lg rounded-bl-lg text-center py-[5px] hover:bg-[#f2f2f2]"
                   >
                     Delete User
                   </p>

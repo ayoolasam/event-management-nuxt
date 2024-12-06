@@ -26,8 +26,13 @@
         <div
           class="absolute right-[10px] cursor-pointer flex gap-4 top-4 px-8 z-40"
         >
-          <i class="ri-edit-line" @click="editModal = true;
-          selectedEvent = event"></i>
+          <i
+            class="ri-edit-line"
+            @click="
+              editModal = true;
+              selectedEvent = event;
+            "
+          ></i>
           <i
             @click="
               close = true;
@@ -69,9 +74,12 @@
       title="Event"
       @closeModal="closeCta"
       @delete="deleteEvent"
+      :loading="dLoading"
     />
-    <EditEvent v-if="editModal" @closeModal="editModal = false"
-    :event="selectedEvent"
+    <EditEvent
+      v-if="editModal"
+      @closeModal="editModal = false"
+      :event="selectedEvent"
     />
   </div>
 </template>
