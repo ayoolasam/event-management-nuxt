@@ -68,6 +68,7 @@ tbody {
 }
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;
+  border-radius: 7px;
 }
 @keyframes skeleton-loading {
   0% {
