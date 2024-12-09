@@ -6,9 +6,9 @@
     <div v-if="loading" class="w-full h-[160px] rounded-md mt-4 skeleton"></div>
     <div v-else class="flex gap-[10px] flex-wrap mt-4">
       <cardBox
-        Title1="Site"
-        Title2="Performance"
-        Amount="60%"
+        Title1="Amount Of"
+        Title2="Tickets"
+        :Amount="ticketTotal"
         :image="ChartBar"
         Color="Chart"
       />
@@ -56,6 +56,7 @@ definePageMeta({
 const toast = useToast();
 const usersTotal = ref("");
 const eventTotal = ref("");
+const ticketTotal = ref(null);
 const loading = ref(true);
 
 const getUsers = async () => {
@@ -99,6 +100,24 @@ const getEvents = async () => {
   }
 };
 
+const getTickets = async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/api/v1/tickets", {
+      withCredentials: true,
+    });
+
+    if (response) {
+      ticketTotal.value = response.data.length;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.response.data.message);
+    }
+  }
+};
+
 const chartOptions = ref({
   chart: {
     type: "bar",
@@ -129,8 +148,10 @@ const series = ref([
 ]);
 
 onMounted(() => {
+  getTickets();
   getUsers();
   getEvents();
+ 
 });
 </script>
 

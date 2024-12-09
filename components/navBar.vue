@@ -1,13 +1,13 @@
 <template>
   <nav class="w-full py-[7px] flex justify-end px-8 bordesign bg-white">
     <div
-      @click="triggerLogOut"
+      @click.stop="triggerLogOut"
       class="user-box flex gap-[10px] items-center relative cursor-pointer"
     >
       <div
         v-if="logOut"
         @click="LogOut"
-        class="shadow-lg cursor-pointer w-[100px] text-subText font-semibold absolute bordesign left-12 top-12 py-[5px] text-center rounded-md"
+        class="shadow-lg log-Button cursor-pointer w-[100px] bg-white text-primary font-semibold absolute bordesign left-12 top-12 py-[5px] text-center rounded-md"
       >
         Log Out
       </div>
@@ -81,6 +81,11 @@ const LogOut = async () => {
 
 onMounted(() => {
   getMe();
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("log-Button") && logOut.value) {
+      logOut.value = false;
+    }
+  });
 });
 </script>
 

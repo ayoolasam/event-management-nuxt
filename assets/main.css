@@ -47,10 +47,10 @@ th {
 } */
 
 td {
-  @apply p-3   font-medium bg-white text-xs ;
+  @apply p-3   font-medium bg-white text-xs;
 }
-tr{
-  @apply bordesign
+tr {
+  @apply bordesign;
 }
 
 .badge {
@@ -64,7 +64,7 @@ tr{
 }
 
 tbody {
-  @apply border-gray-200 ;
+  @apply border-gray-200;
 }
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;

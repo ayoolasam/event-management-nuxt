@@ -74,7 +74,7 @@
       <div class="justify-center flex mt-8">
         <button
           @click="emit('delete')"
-          class="bg-primary text-white rounded-xl w-[60%] py-[10px]"
+          class="bg-primary text-white rounded-xl w-full py-[10px]"
         >
           <MazSpinner v-if="loading" color="white" />
           <span v-else>Delete</span>

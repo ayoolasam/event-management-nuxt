@@ -104,9 +104,9 @@ const sideBarLinks = ref([
     to: { name: "admin-user-management" },
   },
   {
-    text: "Reports and Analytics",
+    text: "Ticket Management",
     icon: "ri-file-chart-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "admin-ticket-management" },
   },
   {
     text: "Settings",
