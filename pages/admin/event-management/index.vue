@@ -17,50 +17,9 @@
         :key="n"
         class="skeleton w-full h-[120px] rounded-md mt-4"
       ></div>
-      <div
-        v-else
-        v-for="(event, index) in events"
-        :key="index"
-        class="mt-4 relative"
-      >
-        <div
-          class="absolute right-[10px] cursor-pointer flex gap-4 top-4 px-8 z-40"
-        >
-          <i
-            class="ri-edit-line"
-            @click="
-              editModal = true;
-              selectedEvent = event;
-            "
-          ></i>
-          <i
-            @click="
-              close = true;
-              selectedEvent = event;
-            "
-            class="ri-delete-bin-line text-red-400"
-          ></i>
-        </div>
-        <MazCard
-          :block="true"
-          :images="['https://loremflickr.com/600/600']"
-          orientation="row"
-        >
-          <template #title>
-            <h3 style="margin: 0; margin-bottom: 20px; font-weight: 600">
-              {{ event.name }}
-            </h3>
-          </template>
-          <template #content>
-            <p class="maz-text-muted" style="margin: 0">
-              {{ event.description }}
-            </p>
-            <div class="flex gap-[5px] text-primary">
-              <i class="ri-map-pin-line"></i>
-              <p>{{ event.location }}</p>
-            </div>
-          </template>
-        </MazCard>
+
+      <div v-else class="flex flex-col gap-8">
+        <EventList :events="events" @update="getEvents" />
       </div>
     </div>
 
@@ -68,18 +27,6 @@
       v-if="create"
       @closeModal="toggleCreate"
       @update="getEvents"
-    />
-    <ctaModal
-      v-if="close"
-      title="Event"
-      @closeModal="closeCta"
-      @delete="deleteEvent"
-      :loading="dLoading"
-    />
-    <EditEvent
-      v-if="editModal"
-      @closeModal="editModal = false"
-      :event="selectedEvent"
     />
   </div>
 </template>
@@ -89,6 +36,7 @@ import createEventModal from "~/components/admin/createEventModal.vue";
 import EditEvent from "~/components/admin/EditEvent.vue";
 import { MazCard } from "maz-ui/components";
 import ctaModal from "~/components/ctaModal.vue";
+import EventList from "~/components/EventList.vue";
 import { useToast } from "maz-ui";
 import axios from "axios";
 const create = ref(false);
@@ -120,31 +68,6 @@ const getEvents = async () => {
     if (response) {
       events.value = response.data.data.events;
       loading.value = false;
-    }
-  } catch (e) {
-    if (e.message.includes("Network")) {
-      toast.error("Please check your internet connection");
-    } else {
-      toast.error(e.message);
-    }
-  }
-};
-
-const deleteEvent = async () => {
-  try {
-    dLoading.value = true;
-    const response = await axios.delete(
-      `http://localhost:5000/api/v1/events/delete/${selectedEvent.value._id}`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    if (response) {
-      dLoading.value = false;
-      toast.success("Event Deleted");
-      closeCta();
-      getEvents();
     }
   } catch (e) {
     if (e.message.includes("Network")) {

@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="mw-[27%] py-4 no-scrollbar overflow-y-auto flex flex-col px-8 modal-content h-[35%] bg-white rounded-md"
+      class="mw-[27%] py-4 no-scrollbar overflow-y-auto flex flex-col px-8 modal-content mh-[35%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -74,9 +74,9 @@
       <div class="justify-center flex mt-8">
         <button
           @click="emit('delete')"
-          class="bg-primary text-white rounded-xl w-full py-[10px]"
+          class="bg-primary h-[40px] text-white  rounded-lg w-full flex items-center justify-center px-20"
         >
-          <MazSpinner v-if="loading" color="white" />
+          <MazSpinner class="h-[40px]" v-if="loading" color="white" />
           <span v-else>Delete</span>
         </button>
       </div>
@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["closeModal", "delete",]);
+const emit = defineEmits(["closeModal", "delete"]);
 const props = defineProps(["title", "loading"]);
 const categories = ref([
   "conference",

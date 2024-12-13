@@ -89,6 +89,7 @@ const getEvents = async () => {
     });
 
     if (response) {
+ 
       eventTotal.value = response.data.length;
     }
   } catch (e) {
@@ -148,10 +149,9 @@ const series = ref([
 ]);
 
 onMounted(() => {
-  getTickets();
   getUsers();
   getEvents();
- 
+  getTickets();
 });
 </script>
 

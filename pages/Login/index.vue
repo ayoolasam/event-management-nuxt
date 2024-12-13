@@ -62,7 +62,7 @@
                 class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium transition-all duration-150"
                 @click="LogIn"
               >
-                <MazSpinner v-if="loading" color="white" />
+                <MazSpinner v-if="loading" class="h-[35px]" color="white" />
                 <span v-else>Sign In</span>
               </button>
               <NuxtLink :to="'/Register'">
@@ -121,11 +121,10 @@ const LogIn = async () => {
   } catch (e) {
     if (e.message.includes("Network")) {
       toast.error("Please check your internet connection");
-      loading.value = false
-
+      loading.value = false;
     } else {
       toast.error(e.response.data.message);
-      loading.value = false
+      loading.value = false;
     }
   }
 };

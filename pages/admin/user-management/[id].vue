@@ -1,17 +1,31 @@
 <template>
   <div class="ctn">
+    <NuxtLink :to="`/admin/user-management`">
+      <div class="flex items-center gap-[10px] mb-8">
+        <div
+          class="w-[40px] flex items-center justify-center cursor-pointer h-[40px] bg-[#f2f2f2] rounded-full bordesign"
+        >
+          <i class="ri-arrow-left-s-line"></i>
+        </div>
+        <span class="font-semibold text-sm text-primary">user-management</span>
+      </div>
+    </NuxtLink>
 
-<div v-if="loading" class="h-[160px] bordesign rounded-md gap-8 py-4flex px-4 flex items-center flex-wrap mt-12">
-<div class="skeleton h-[120px] w-[120px] skeleton rounded-full"></div>
-<div class=" class flex flex-col gap-4">
-  <div class="skeleton w-[70px] h-[20px]"></div>
-  <div class="skeleton   w-[270px] h-[40px]"></div>
-</div>
+    <div
+      v-if="loading"
+      class="h-[160px] bordesign rounded-md gap-8 py-4flex px-4 flex items-center flex-wrap mt-12"
+    >
+      <div class="skeleton h-[120px] w-[120px] skeleton rounded-full"></div>
+      <div class="class flex flex-col gap-4">
+        <div class="skeleton w-[70px] h-[20px]"></div>
+        <div class="skeleton w-[270px] h-[40px]"></div>
+      </div>
+    </div>
 
-</div>
-
-
-    <div v-else class="py-8 bordesign rounded-md gap-8 flex px-4 flex-wrap mt-12">
+    <div
+      v-else
+      class="py-8 bordesign rounded-md gap-8 flex px-4 flex-wrap mt-12"
+    >
       <div class="rounded-full h-[120px] w-[120px]">
         <img
           class="w-full h-full object-contain object-center"
@@ -43,18 +57,15 @@ import { useRoute } from "vue-router";
 import axios from "axios";
 const route = useRoute();
 const id = route.params.id;
-const loading = ref(false)
+const loading = ref(false);
 const user = ref({});
-
-
-
 
 definePageMeta({
   layout: "admin",
 });
 
 const getUser = async () => {
-  loading.value = true
+  loading.value = true;
   try {
     const response = await axios.get(
       `http://localhost:5000/api/v1/users/user/${id}`,
@@ -65,8 +76,7 @@ const getUser = async () => {
 
     if (response) {
       user.value = response.data.data.user;
-      loading.value = false
-  
+      loading.value = false;
     }
   } catch (e) {
     if (e.message.includes("Network")) {
@@ -76,8 +86,6 @@ const getUser = async () => {
     }
   }
 };
-
-
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);

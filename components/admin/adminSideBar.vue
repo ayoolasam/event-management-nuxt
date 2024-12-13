@@ -1,40 +1,42 @@
 <template>
   <aside
     :class="{
-      'w-[5%]': collapse,
+      'w-[6%]': collapse,
     }"
-    class="bg-primary shadow-sm h-full w-[20%] flex flex-col gap-[50px] relative py-12 rounded-tr-2xl transition-all duration-700"
+    class="bg-primary shadow-sm h-full w-[20%] flex flex-col gap-[50px] relative py-12 transition-all duration-700"
   >
-    <div
-      @click="isCollapsed"
-      class="absolute shadow-3xl top-8 right-4 bg-white flex items-center justify-center h-[40px] w-[40px] rounded-full hover:scale-125 transition-all duration-300"
-    >
-      <i
-        v-if="!collapse"
-        class="ri-arrow-left-double-fill text-[25px] hover:scale-75 transition-all duration-300"
-      ></i>
-      <i
-        v-else
-        class="ri-arrow-right-double-line text-[25px] hover:scale-75 transition-all duration-300"
-      ></i>
+    <div class="arrow">
+      <div
+        @click="isCollapsed"
+        class="absolute arrow-box shadow-3xl top-4 right-4 bg-white flex items-center justify-center h-[35px] w-[35px] rounded-full hover:scale-125 transition-all duration-300"
+      >
+        <i
+          v-if="!collapse"
+          class="ri-arrow-left-double-fill text-[25px] hover:scale-75 transition-all duration-300"
+        ></i>
+        <i
+          v-else
+          class="ri-arrow-right-double-line text-[25px] hover:scale-75 transition-all duration-300"
+        ></i>
+      </div>
     </div>
     <div
       :class="{
         'mt-12 px-[5px]': collapse,
       }"
-      class="w-full flex items-center justify-center transition-all duration-200"
+      class="w-full flex items-center justify-center transition-all duration-700"
     >
       <img
         :class="{
-          'w-[30px] h-[20px]': collapse,
+          'w-[26px] h-[25px]': collapse,
         }"
-        class="w-[70px] h-[40px]"
+        class="w-[70px] h-[40px] image-logo"
         src="../../assets/images/logo-white.png"
         alt="logo"
       />
     </div>
     <div class="link-section overflow-y-auto no-scrollbar h-[65%]">
-      <ul class="transition-all duration-500">
+      <ul class="transition-all duration-700">
         <li
           :class="{
             'flex justify-center': collapse,
@@ -109,9 +111,9 @@ const sideBarLinks = ref([
     to: { name: "admin-ticket-management" },
   },
   {
-    text: "Settings",
+    text: "Transactions",
     icon: "ri-settings-3-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "admin-transactions" },
   },
   {
     text: "Support and FeedBack",
@@ -135,4 +137,23 @@ const options = ref([
 ]);
 </script>
 
-<style scoped></style>
+<style scoped>
+@media (max-width: 1050px) {
+  li {
+    font-size: 12px;
+  }
+  .arrow-box {
+    height: 30px;
+    width: 30px;
+    right: 7px;
+  }
+  .arrow {
+    display: flex;
+    justify-items: center;
+  }
+  .image-logo {
+    height: 30px;
+    width: 40px;
+  }
+}
+</style>
