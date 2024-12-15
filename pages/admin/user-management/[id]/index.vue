@@ -29,7 +29,7 @@
       <div class="rounded-full h-[120px] w-[120px]">
         <img
           class="w-full h-full object-contain object-center"
-          src="../../../assets/images/student.png"
+          src="../../../../assets/images/student.png"
           alt="profile-picture"
         />
       </div>
@@ -49,6 +49,31 @@
         </div>
       </div>
     </div>
+
+    <div class="flex mt-4 filterTabs gap-4 text-">
+      <NuxtLink :to="`/admin/user-management/${user._id}/user-tickets`">
+        <div
+          @click="changeSubPage('Tickets')"
+          :class="{ 'bg-primary text-white': present === 'Tickets' }"
+          class="text-sm rounded-md font-semibold p-[10px] cursor-pointer bg-[#f2f2f2]"
+        >
+          Tickets
+        </div>
+      </NuxtLink>
+
+      <NuxtLink :to="`/admin/user-management/${user._id}/user-transactions`">
+        <div
+          @click="changeSubPage('Transactions')"
+           :class="{ 'bg-primary text-white': present === 'Transactions' }"
+          class="text-sm rounded-md font-semibold p-[10px] bg-[#f2f2f2]"
+        >
+          Transactions
+        </div>
+      </NuxtLink>
+    </div>
+    <div class="ctn">
+      <NuxtPage> </NuxtPage>
+    </div>
   </div>
 </template>
 
@@ -59,6 +84,10 @@ const route = useRoute();
 const id = route.params.id;
 const loading = ref(false);
 const user = ref({});
+const present = ref("Tickets");
+const changeSubPage = (page) => {
+  present.value = page;
+};
 
 definePageMeta({
   layout: "admin",
@@ -95,6 +124,10 @@ const formatDate = (dateString) => {
     day: "2-digit",
   });
 };
+
+
+
+
 
 onMounted(() => {
   getUser();

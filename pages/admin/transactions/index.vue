@@ -42,11 +42,11 @@
                 <span
                   class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
                 >
-                  {{ transaction.paidBy.name[0] }}
-                  {{ transaction.paidBy.name[5] }}
+                  {{ transaction?.paidBy?.name[0] }}
+                  {{ transaction?.paidBy?.name[5] }}
                 </span>
                 <div class="">
-                  <p class="font-normal">{{ transaction.paidBy.name }}</p>
+                  <p class="font-normal">{{ transaction?.paidBy?.name }}</p>
                   <p class="text-[12px] text-gray-600">
                     {{ transaction.email }}
                   </p>

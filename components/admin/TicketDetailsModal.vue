@@ -16,7 +16,9 @@
       <div class="mt-4">
         <table class="w-full h-full">
           <tr class="">
-            <td class="bordesign py-8 text-black text-[15px] font-semibold">Ticket ID</td>
+            <td class="bordesign py-8 text-black text-[15px] font-semibold">
+              Ticket ID
+            </td>
             <td class="bordesign">{{ ticket.ticketCode }}</td>
           </tr>
           <tr>
@@ -24,7 +26,15 @@
             <td class="bordesig">{{ ticket.event.name }}</td>
           </tr>
           <tr>
-            <td class="bordesign py-8 text-[15px] font-semibold">Purchased By</td>
+            <td class="bordesign py-8 text-[15px] font-semibold">
+              Payment Status
+            </td>
+            <td class="bordesig">{{ ticket.isPaid ? "Paid " : "Not Paid" }}</td>
+          </tr>
+          <tr>
+            <td class="bordesign py-8 text-[15px] font-semibold">
+              Purchased By
+            </td>
             <td class="flex items-center gap-[5px]">
               <span
                 class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
@@ -41,7 +51,9 @@
             </td>
           </tr>
           <tr>
-            <td class="bordesign py-8 text-[15px] font-semibold">Number Of Tickets</td>
+            <td class="bordesign py-8 text-[15px] font-semibold">
+              Number Of Tickets
+            </td>
             <td>{{ ticket.noOfTickets }}</td>
           </tr>
           <tr>
@@ -59,7 +71,9 @@
             </td>
           </tr>
           <tr>
-            <td class="bordesign py-8 text-[15px] font-semibold">Purchased At</td>
+            <td class="bordesign py-8 text-[15px] font-semibold">
+              Purchased At
+            </td>
             <td>{{ formatDate(ticket.purchasedAt) }}</td>
           </tr>
         </table>

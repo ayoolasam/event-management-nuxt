@@ -54,7 +54,7 @@ tr {
 }
 
 .badge {
-  @apply px-4 text-xs py-[5px] rounded-lg font-medium uppercase tracking-wider bg-opacity-30;
+  @apply px-[5px] text-xs py-[5px] rounded-lg font-medium uppercase tracking-wider bg-opacity-30;
 }
 .badge-green {
   @apply bg-green-700 text-white;

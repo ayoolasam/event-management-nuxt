@@ -59,56 +59,20 @@ const eventTotal = ref("");
 const ticketTotal = ref(null);
 const loading = ref(true);
 
-const getUsers = async () => {
-  let response;
+const fetchDashboardData = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/users/GetUsers",
+      "http://localhost:5000/api/v1/users/admin/dashBoard",
       {
         withCredentials: true,
       }
     );
 
     if (response) {
-      usersTotal.value = response.data.no_of_users;
+      eventTotal.value = response.data.data.events.length;
+      ticketTotal.value = response.data.data.tickets.length;
+      usersTotal.value = response.data.data.users.length;
       loading.value = false;
-    }
-  } catch (e) {
-    if (e.message.includes("Network")) {
-      toast.error("Please check your internet connection");
-    } else {
-      toast.error(e.response.data.message);
-    }
-  }
-};
-
-const getEvents = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/api/v1/events", {
-      withCredentials: true,
-    });
-
-    if (response) {
- 
-      eventTotal.value = response.data.length;
-    }
-  } catch (e) {
-    if (e.message.includes("Network")) {
-      toast.error("Please check your internet connection");
-    } else {
-      toast.error(e.response.data.message);
-    }
-  }
-};
-
-const getTickets = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/api/v1/tickets", {
-      withCredentials: true,
-    });
-
-    if (response) {
-      ticketTotal.value = response.data.length;
     }
   } catch (e) {
     if (e.message.includes("Network")) {
@@ -149,9 +113,7 @@ const series = ref([
 ]);
 
 onMounted(() => {
-  getUsers();
-  getEvents();
-  getTickets();
+  fetchDashboardData();
 });
 </script>
 

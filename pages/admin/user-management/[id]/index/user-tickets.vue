@@ -1,7 +1,5 @@
 <template>
-  <div class="h-full ctn">
-    <h1 class="font-bold text-[25px]">Tickets</h1>
-
+  <div>
     <TableLoader v-if="loading" />
     <div v-else class="">
       <div class="mt-4 flex justify-between w-full rounded-tl-lg bordesign p-3">
@@ -15,7 +13,7 @@
           <i class="ri-search-line ml-[-25px] text-gray-500"></i>
         </div>
       </div>
-      <div class="overflow-auto no-scrollbar">
+      <div class="overflow-x-auto no-scrollbar">
         <table class="w-full">
           <thead class="bg-[#f2f2f2]">
             <tr>
@@ -24,7 +22,7 @@
               <th>Purchased By</th>
               <th>Paid</th>
               <th>Status</th>
-              <th>No of Tickets</th>
+              <th class="whitespace-nowrap">No of Tickets</th>
 
               <th>Purchased On</th>
 
@@ -37,7 +35,7 @@
                 {{ ticket.ticketCode }}
               </td>
               <td class="text-gray-600 text-md">{{ ticket.event.name }}</td>
-              <td class="flex gap-[8px] items-center">
+              <td class="flex gap-[8px] text-left items-center">
                 <span
                   class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
                 >
@@ -51,9 +49,11 @@
                   </p>
                 </div>
               </td>
-              <td class="text-gray-600 text-md">{{ ticket.isPaid ? 'Paid' : 'Not Paid' }}</td>
+              <td class="text-gray-600 text-md whitespace-nowrap">
+                {{ ticket.isPaid ? "Paid" : "Not Paid" }}
+              </td>
 
-              <td class="text-center">
+              <td class="text-center whitespace-nowrap">
                 <span
                   :class="{
                     'badge-green': ticket.isUsed,
@@ -70,7 +70,7 @@
                   ticket.noOfTickets
                 }}</span>
               </td>
-              <td>{{ formatDate(ticket.purchasedAt) }}</td>
+              <td class="whitespace-nowrap">{{ formatDate(ticket.purchasedAt) }}</td>
               <!-- <td>{{ user.dateJoined }}</td> -->
               <td class="">
                 <i
@@ -106,21 +106,15 @@
         </table>
       </div>
     </div>
-
-    <TicketDetailsModal
-      v-if="ticketDetails"
-      @closeModal="ticketDetails = false"
-      :ticket="selectedTicket"
-    />
   </div>
 </template>
 
 <script setup>
-import { MazBtn } from "maz-ui/components";
 import TableLoader from "~/components/TableLoader.vue";
 import TicketDetailsModal from "~/components/admin/TicketDetailsModal.vue";
 import axios from "axios";
 import { useToast } from "maz-ui";
+import { useRoute } from "vue-router";
 
 definePageMeta({
   layout: "admin",
@@ -132,6 +126,7 @@ const toast = useToast();
 const loading = ref(true);
 const tickets = ref([]);
 const ticketDetails = ref(false);
+const route = useRoute();
 
 const showMore = (index) => {
   show.value = !show.value;
@@ -148,14 +143,17 @@ const formatDate = (dateString) => {
   });
 };
 
-const getTickets = async () => {
+const getUserTickets = async () => {
   try {
-    const response = await axios.get("http://localhost:5000/api/v1/tickets", {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      `http://localhost:5000/api/v1/users/tickets/user/${route.params.id}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     if (response) {
-      tickets.value = response.data.data.tickets;
+      tickets.value = response.data.data.userTickets;
       loading.value = false;
     }
   } catch (e) {
@@ -168,7 +166,7 @@ const getTickets = async () => {
 };
 
 onMounted(() => {
-  getTickets();
+  getUserTickets();
 
   document.addEventListener("click", (e) => {
     if (!e.target.closest("actions-menu") && show.value) {
