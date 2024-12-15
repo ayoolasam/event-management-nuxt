@@ -1,8 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+runtimeConfig:{
+  public: {
+    apiBaseUrl:'http://localhost:5000'
+},
 
-
-
+},
 
   build: {
     transpile: ['maz-ui'],
@@ -26,6 +29,9 @@ export default defineNuxtConfig({
   ],
     'pinia-plugin-persistedstate/nuxt',
   ],
+
+
+ 
 
   mazUi: {
     injectComponents: true,

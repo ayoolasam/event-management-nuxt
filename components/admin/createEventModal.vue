@@ -17,7 +17,7 @@
         <div>
           <label class="block">Name</label>
           <input
-            class="w-full px-4 py-[7px] mt-[10px] focus:outline-none rounded-md bordesign text-sm"
+            class="w-full bg-[#f2f2f2] h-12 px-4 mt-[10px] focus:outline-none rounded-md bordesign text-sm"
             v-model="name"
           />
         </div>
@@ -25,7 +25,7 @@
           <label class="block">Date</label>
           <input
             type="date"
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bordesign text-sm"
+            class="inputDesign"
             v-model="date"
           />
         </div>
@@ -34,14 +34,14 @@
           <label class="block">Capacity</label>
           <input
             type="number"
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bordesign text-sm"
+            class="inputDesign"
             v-model="capacity"
           />
         </div>
         <div class="mt-4">
           <label class="block">Category</label>
           <select
-            class="w-full mt-[10px] py-[5px] border-[1px] rounded-md bordesign text-sm"
+            class="inputDesign"
             v-model="category"
           >
             <option v-for="(category, index) in categories" :key="index">
@@ -53,7 +53,7 @@
         <div class="mt-4">
           <label class="block">location</label>
           <input
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bordesign text-sm"
+            class="inputDesign"
             v-model="location"
           />
         </div>
@@ -62,14 +62,14 @@
           <label class="block">Price</label>
           <input
             type="text"
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bordesign text-sm"
+            class="inputDesign"
             v-model="price"
           />
         </div>
         <div class="mt-4">
           <label class="block">Description</label>
           <textarea
-            class="w-full px-4 mt-[10px] py-8 focus:outline-none rounded-md bordesign text-sm"
+            class="w-full px-4 bg-[#f2f2f2] mt-[10px] py-8 focus:outline-none rounded-md bordesign text-sm"
             v-model="description"
           />
         </div>

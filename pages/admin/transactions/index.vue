@@ -121,6 +121,7 @@ import TableLoader from "~/components/TableLoader.vue";
 import axios from "axios";
 import { useToast } from "maz-ui";
 import TransactionDetails from "~/components/admin/TransactionDetails.vue";
+const { $apiClient } = useNuxtApp();
 
 definePageMeta({
   layout: "admin",
@@ -153,12 +154,9 @@ const formatDate = (dateString) => {
 
 const getTransactions = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:5000/payments/transactions",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await $apiClient.get("/payments/transactions", {
+      withCredentials: true,
+    });
 
     if (response) {
       transactions.value = response.data.data.transactions;

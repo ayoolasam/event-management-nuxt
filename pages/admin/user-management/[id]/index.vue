@@ -26,10 +26,20 @@
       v-else
       class="py-8 bordesign rounded-md gap-8 flex px-4 flex-wrap mt-12"
     >
-      <div class="rounded-full h-[120px] w-[120px]">
+      <div
+        v-if="!user?.imageUrl"
+        class="h-[120px] rounded-full flex items-center gap-[5px] justify-center w-[120px] bg-[#f2f2f2]"
+      >
+        <span class="font-bold text-xl">
+          {{ user && user.name ? user.name[0] : '' }}
+        </span>
+        <span class="font-bold text-xl"> {{ user && user.name ? user.name[0] : '' }}</span>
+      </div>
+
+      <div v-else class="rounded-full h-[120px] w-[120px]">
         <img
-          class="w-full h-full object-contain object-center"
-          src="../../../../assets/images/student.png"
+          class=" h-full w-full  rounded-full object-cover object-center"
+          :src="user?.imageUrl"
           alt="profile-picture"
         />
       </div>
@@ -64,7 +74,7 @@
       <NuxtLink :to="`/admin/user-management/${user._id}/user-transactions`">
         <div
           @click="changeSubPage('Transactions')"
-           :class="{ 'bg-primary text-white': present === 'Transactions' }"
+          :class="{ 'bg-primary text-white': present === 'Transactions' }"
           class="text-sm rounded-md font-semibold p-[10px] bg-[#f2f2f2]"
         >
           Transactions
@@ -124,10 +134,6 @@ const formatDate = (dateString) => {
     day: "2-digit",
   });
 };
-
-
-
-
 
 onMounted(() => {
   getUser();

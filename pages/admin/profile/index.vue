@@ -24,12 +24,17 @@
         </div>
       </div>
     </div>
-    <div class="mt-8">
+    <div class="mt-8 flex gap-4">
       <span
         @click="uploadImage = true"
         class="bordesign p-[10px] cursor-pointer rounded-xl text-xs font-semibold"
         >Click to Upload User Avatar <i class="ri-upload-2-line"></i
       ></span>
+      <span
+        @click="updateProfile = true"
+        class="bordesign p-[10px] cursor-pointer rounded-xl text-xs font-semibold"
+        >Click to Update User Details <i class="ri-user-fill"></i>
+      </span>
     </div>
 
     <Upload
@@ -37,18 +42,26 @@
       @closeModal="uploadImage = false"
       @update="userStore.fetchUserDetails"
     />
+    <UpdateUserDetails
+      v-if="updateProfile"
+      @closeModal="updateProfile = false"
+      @update="userStore.fetchUserDetails"
+
+    />
   </div>
 </template>
 
 <script setup>
 import { useUserStore } from "~/stores";
 import Upload from "~/components/Upload.vue";
+import UpdateUserDetails from "~/components/UpdateUserDetails.vue";
 definePageMeta({
   layout: "admin",
 });
 
 const userStore = useUserStore();
 const uploadImage = ref(false);
+const updateProfile = ref(false);
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
