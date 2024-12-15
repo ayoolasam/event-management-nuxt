@@ -19,7 +19,7 @@
       </div>
       <div class="flex gap-[8px] items-center">
         <div class="h-[40px] w-[40px] bg-green-400 rounded-full">
-          <img src="../assets/images/student.png" alt="user-photo" />
+          <img class="h-full w-full object-cover object-center rounded-full" :src="userStore.user.imageUrl" alt="user-photo" />
         </div>
 
         <i class="ri-arrow-down-s-line"></i>
