@@ -70,6 +70,11 @@
                   >Dont Have an Account Signup?</span
                 >
               </NuxtLink>
+              <NuxtLink :to="'forgotPassword'">
+                <span class="text-gray-600 text-[14px]"
+                  >Forgot Password?</span
+                >
+              </NuxtLink>
             </div>
           </div>
         </div>

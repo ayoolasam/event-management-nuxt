@@ -2,6 +2,24 @@ import { useUserStore } from "#imports";
 
 export default defineNuxtRouteMiddleware((to, from) => {
   const userStore = useUserStore();
+
+  const publicRoutes = [
+    "/",
+    "/Login",
+    "/Register",
+    "/forgotPassword",
+  ,
+  ];
+
+  if (to.meta.auth === false) {
+    return
+  }
+
+  // If the route is public, just allow access without checks
+  if (publicRoutes.includes(to.path)) {
+    return;
+  }
+
   const roleDashboards = {
     Admin: "/admin/dashboard",
     User: "/user/dashboard",
