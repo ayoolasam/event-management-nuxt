@@ -51,7 +51,9 @@
                   </p>
                 </div>
               </td>
-              <td class="text-gray-600 text-md">{{ ticket.isPaid ? 'Paid' : 'Not Paid' }}</td>
+              <td class="text-gray-600 text-md">
+                {{ ticket.isPaid ? "Paid" : "Not Paid" }}
+              </td>
 
               <td class="text-center">
                 <span
@@ -89,10 +91,14 @@
                       "
                     >
                       <i class="ri-eye-line"></i>
-                      View Ticket Details
+                      View Details
                     </p>
 
                     <p
+                      @click="
+                        selectedTicket = ticket;
+                        showCta = true;
+                      "
                       class="w-full py-[13px] rounded-br-lg rounded-bl-lg text-center flex gap-4 justify-center hover:bg-[#f2f2f2]"
                     >
                       <i class="ri-delete-bin-line"></i>
@@ -112,6 +118,14 @@
       @closeModal="ticketDetails = false"
       :ticket="selectedTicket"
     />
+
+    <ctaModal
+      v-if="showCta"
+      @closeModal="showCta = false"
+      title="Ticket"
+      :loading="dLoading"
+      @delete="deleteTicket"
+    />
   </div>
 </template>
 
@@ -119,8 +133,10 @@
 import { MazBtn } from "maz-ui/components";
 import TableLoader from "~/components/TableLoader.vue";
 import TicketDetailsModal from "~/components/admin/TicketDetailsModal.vue";
+import ctaModal from "~/components/ctaModal.vue";
 import axios from "axios";
 import { useToast } from "maz-ui";
+const { $apiClient } = useNuxtApp();
 
 definePageMeta({
   layout: "admin",
@@ -132,11 +148,14 @@ const toast = useToast();
 const loading = ref(true);
 const tickets = ref([]);
 const ticketDetails = ref(false);
+const dLoading = ref(false);
+const showCta = ref(false);
 
 const showMore = (index) => {
   show.value = !show.value;
   showIndex.value = index;
 };
+
 const users = ref([]);
 
 const formatDate = (dateString) => {
@@ -150,13 +169,38 @@ const formatDate = (dateString) => {
 
 const getTickets = async () => {
   try {
-    const response = await axios.get("http://localhost:5000/api/v1/tickets", {
+    const response = await $apiClient.get("/api/v1/tickets", {
       withCredentials: true,
     });
 
     if (response) {
       tickets.value = response.data.data.tickets;
       loading.value = false;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.message);
+    }
+  }
+};
+
+const deleteTicket = async () => {
+  dLoading.value = true;
+  try {
+    const response = await $apiClient.delete(
+      `/api/v1/tickets/ticket/${selectedTicket.value._id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      dLoading.value = false;
+      toast.success("Ticket Deleted Successfully");
+      showCta.value = false;
+      getTickets();
     }
   } catch (e) {
     if (e.message.includes("Network")) {

@@ -94,6 +94,7 @@ const close = ref(false);
 const selectedEvent = ref({});
 const editModal = ref(false);
 const dLoading = ref(false);
+const {$apiClient} = useNuxtApp()
 
 const closeCta = () => {
   close.value = !close.value;
@@ -115,8 +116,8 @@ const formatDate = (dateString) => {
 const deleteEvent = async () => {
   try {
     dLoading.value = true;
-    const response = await axios.delete(
-      `http://localhost:5000/api/v1/events/delete/${selectedEvent.value._id}`,
+    const response = await $apiClient.delete(
+      `/api/v1/events/delete/${selectedEvent.value._id}`,
       {
         withCredentials: true,
       }

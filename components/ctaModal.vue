@@ -12,65 +12,7 @@
         <p class="font-semibold text-[25px]">Delete</p>
         <span>Are you sure you want to delete this {{ title }}</span>
       </div>
-      <!-- <div class="mt-4">
-        <div>
-          <label class="block">Name</label>
-          <input
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
-          />
-        </div>
-        <div class="mt-4">
-          <label class="block">Date</label>
-          <input
-            type="date"
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
-          />
-        </div>
-
-        <div class="mt-4">
-          <label class="block">Capacity</label>
-          <input
-            type="number"
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
-          />
-        </div>
-        <div class="mt-4">
-          <label class="block">Category</label>
-          <select
-            class="w-full mt-[10px] border-primary py-[5px] border-[1px] rounded-md"
-          >
-            <option v-for="(category, index) in categories" :key="index">
-              {{ category }}
-            </option>
-          </select>
-        </div>
-
-        <div class="mt-4">
-          <label class="block">location</label>
-          <input
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
-          />
-        </div>
-
-        <div class="mt-4">
-          <label class="block">Price</label>
-          <input
-            type="text"
-            class="w-full px-4 py-[4px] mt-[10px] focus:outline-none rounded-md bg-gray-300"
-          />
-        </div>
-        <div class="mt-4">
-          <label class="block">Description</label>
-          <textarea
-            class="w-full px-4 mt-[10px] py-8 focus:outline-none rounded-md bg-gray-300"
-          />
-        </div>
-        <div class="flex justify-center items-center mt-8">
-          <button class="px-20 text-white rounded-lg bg-primary py-[10px]">
-            Create Event
-          </button>
-        </div>
-      </div> -->
+      
       <div class="justify-center flex mt-8">
         <button
           @click="emit('delete')"

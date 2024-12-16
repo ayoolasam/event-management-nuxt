@@ -69,6 +69,7 @@ const selectedFile = ref("");
 const previewImage = ref(null);
 const userImage = ref("");
 const loading = ref(false);
+const {$apiClient} = useNuxtApp()
 
 const close = () => {
   emit("closeModal");
@@ -104,8 +105,8 @@ const uploadImage = async () => {
   const formData = new FormData();
   formData.append("image", selectedFile.value);
   try {
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/upload/file",
+    const response = await $apiClient.post(
+      "/api/v1/upload/file",
       formData,
 
       {
@@ -127,8 +128,8 @@ const uploadImage = async () => {
 
 const sendImage = async () => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/users/user/Avatar",
+    const response = await $apiClient.post(
+      "/api/v1/users/user/Avatar",
       {
         imageUrl: userImage.value,
       },

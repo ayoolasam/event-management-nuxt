@@ -115,6 +115,7 @@ const route = useRoute();
 const toast = useToast();
 const event = ref({});
 const loading = ref(true);
+const {$apiClient} = useNuxtApp()
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -128,8 +129,8 @@ const formatDate = (dateString) => {
 const fetchEvent = async () => {
   try {
     loading.value = true;
-    const response = await axios.get(
-      `http://localhost:5000/api/v1/events/${route.params.id}`,
+    const response = await $apiClient.get(
+      `/api/v1/events/${route.params.id}`,
       {
         withCredentials: true,
       }

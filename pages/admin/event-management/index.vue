@@ -47,6 +47,7 @@ const close = ref(false);
 const selectedEvent = ref({});
 const editModal = ref(false);
 const dLoading = ref(false);
+const {$apiClient} = useNuxtApp()
 const toggleCreate = () => {
   create.value = !create.value;
 };
@@ -61,7 +62,7 @@ const closeCta = () => {
 const getEvents = async () => {
   try {
     loading.value = true;
-    const response = await axios.get("http://localhost:5000/api/v1/events", {
+    const response = await $apiClient.get("/api/v1/events", {
       withCredentials: true,
     });
 

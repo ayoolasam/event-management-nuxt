@@ -33,7 +33,7 @@
             <div class="form-group px-8 w-full flex flex-col gap-[5px]">
               <label class="block font-medium text-gray-500">Email</label>
               <input
-                class="px-4 py-[8px] shadow-sm rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
+                class="inputDesign placeholder:text-[13px]"
                 type="text"
                 placeholder=" Enter Your Email"
                 v-model="email"
@@ -50,7 +50,7 @@
               </span>
               <label class="block font-medium text-gray-500">Password</label>
               <input
-                class="px-4 py-[8px] shadow-sm rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
+                class="inputDesign placeholder:text-[13px]"
                 :type="show ? 'text' : 'password'"
                 placeholder=" Enter Your Password"
                 v-model="password"
@@ -87,6 +87,7 @@ const show = ref(false);
 const toast = useToast();
 const userStore = useUserStore();
 const loading = ref(false);
+const {$apiClient} = useNuxtApp()
 
 const showPassword = () => {
   show.value = !show.value;
@@ -96,8 +97,8 @@ const LogIn = async () => {
   let response;
   try {
     loading.value = true;
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/users/login",
+    const response = await $apiClient.post(
+      "/api/v1/users/login",
       {
         password: password.value,
         email: email.value,

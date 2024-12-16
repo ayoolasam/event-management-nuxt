@@ -58,11 +58,12 @@ const usersTotal = ref("");
 const eventTotal = ref("");
 const ticketTotal = ref(null);
 const loading = ref(true);
+const {$apiClient} = useNuxtApp()
 
 const fetchDashboardData = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:5000/api/v1/users/admin/dashBoard",
+    const response = await $apiClient.get(
+      "/api/v1/users/admin/dashBoard",
       {
         withCredentials: true,
       }

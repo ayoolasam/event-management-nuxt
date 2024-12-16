@@ -21,7 +21,7 @@
             <div class="form-group px-8 w-full flex flex-col gap-[5px]">
               <label class="block font-medium text-gray-500">Name</label>
               <input
-                class="px-4 shadow-sm py-[8px] rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
+                class="inputDesign placeholder:text-[13px]"
                 type="text"
                 placeholder="Enter your Name"
                 v-model="name"
@@ -30,7 +30,7 @@
             <div class="form-group px-8 w-full flex flex-col gap-[5px]">
               <label class="block font-medium text-gray-500">Username</label>
               <input
-                class="px-4 shadow-sm py-[8px] rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
+                class="inputDesign placeholder:text-[13px]"
                 type="text"
                 placeholder="Enter your username"
                 v-model="username"
@@ -39,7 +39,7 @@
             <div class="form-group px-8 w-full flex flex-col gap-[5px]">
               <label class="block font-medium text-gray-500">Email</label>
               <input
-                class="px-4 py-[8px] shadow-sm rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
+                class="inputDesign placeholder:text-[13px]"
                 type="text"
                 placeholder=" Enter Your Email"
                 v-model="email"
@@ -56,7 +56,7 @@
               </span>
               <label class="block font-medium text-gray-500">Password</label>
               <input
-                class="px-4 py-[8px] shadow-sm rounded-lg border-[1px] border-[#efebe9] focus:outline-none placeholder:text-[13px]"
+                class="inputDesign placeholder:text-[13px]"
                 :type="show ? 'text' : 'password'"
                 placeholder=" Enter Your Password"
                 v-model="password"
@@ -90,6 +90,7 @@ const show = ref(false);
 const name = ref("");
 const username = ref("");
 const email = ref("");
+const {$apiClient} = useNuxtApp()
 
 const showPassword = () => {
   show.value = !show.value;

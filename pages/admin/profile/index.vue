@@ -37,6 +37,31 @@
       </span>
     </div>
 
+    <div class="flex mt-4 filterTabs gap-4 text-">
+      <NuxtLink :to="`/admin/profile/user-tickets`">
+        <div
+          @click="changeSubPage('Tickets')"
+          :class="{ 'bg-primary text-white': present === 'Tickets' }"
+          class="text-sm rounded-md font-semibold p-[10px] cursor-pointer bg-[#f2f2f2]"
+        >
+          My Tickets
+        </div>
+      </NuxtLink>
+
+      <NuxtLink :to="`/admin/profile/user-transactions`">
+        <div
+          @click="changeSubPage('Transactions')"
+          :class="{ 'bg-primary text-white': present === 'Transactions' }"
+          class="text-sm rounded-md font-semibold p-[10px] bg-[#f2f2f2]"
+        >
+          My Transactions
+        </div>
+      </NuxtLink>
+    </div>
+    <div class="ctn">
+      <NuxtPage> </NuxtPage>
+    </div>
+
     <Upload
       v-if="uploadImage"
       @closeModal="uploadImage = false"
@@ -46,7 +71,6 @@
       v-if="updateProfile"
       @closeModal="updateProfile = false"
       @update="userStore.fetchUserDetails"
-
     />
   </div>
 </template>
@@ -58,7 +82,10 @@ import UpdateUserDetails from "~/components/UpdateUserDetails.vue";
 definePageMeta({
   layout: "admin",
 });
-
+const present = ref("Tickets");
+const changeSubPage = (page) => {
+  present.value = page;
+};
 const userStore = useUserStore();
 const uploadImage = ref(false);
 const updateProfile = ref(false);

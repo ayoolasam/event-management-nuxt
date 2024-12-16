@@ -95,6 +95,7 @@ const id = route.params.id;
 const loading = ref(false);
 const user = ref({});
 const present = ref("Tickets");
+const {$apiClient} = useNuxtApp()
 const changeSubPage = (page) => {
   present.value = page;
 };
@@ -106,8 +107,8 @@ definePageMeta({
 const getUser = async () => {
   loading.value = true;
   try {
-    const response = await axios.get(
-      `http://localhost:5000/api/v1/users/user/${id}`,
+    const response = await $apiClient.get(
+      `/api/v1/users/user/${id}`,
       {
         withCredentials: true,
       }
