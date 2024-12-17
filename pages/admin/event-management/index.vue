@@ -1,10 +1,10 @@
 <template>
   <div class="h-full ctn no-scrollbar">
-    <div class="flex justify-between items-center">
-      <h1 class="font-semibold text-[28px]">Event Management</h1>
+    <div class="flex justify-between flex-wrap items-center">
+      <h1 class="font-semibold  lg:text-[28px] md:text-sm ">Event Management</h1>
       <div
         @click="toggleCreate"
-        class="bg-primary cursor-pointer text-white px-8 rounded-md shadow-md text-center py-[5px]"
+        class="bg-primary cursor-pointer text-white px-8 rounded-md shadow-md text-center py-[5px] text-xs lg:text-md md:text-sm sm:py-[6px]   md:py-[5px] lg:py-[10px]"
       >
         Create Event
       </div>

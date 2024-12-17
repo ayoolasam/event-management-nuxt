@@ -1,10 +1,10 @@
 <template>
   <div class="ctn h-full no-scrollbar">
-    <div class="bg-primary text-white py-4 px-4 rounded-xl shadow-lg">
+    <div class="bg-primary text-white py-4  px-4 rounded-xl shadow-lg">
       Welcome Admin!
     </div>
     <div v-if="loading" class="w-full h-[160px] rounded-md mt-4 skeleton"></div>
-    <div v-else class="flex gap-[10px] flex-wrap mt-4">
+    <div v-else class="lg:grid-cols-4 gap-4 grid md:grid-cols-2 sm:grid-cols-1 mt-4">
       <cardBox
         Title1="Amount Of"
         Title2="Tickets"
@@ -58,16 +58,13 @@ const usersTotal = ref("");
 const eventTotal = ref("");
 const ticketTotal = ref(null);
 const loading = ref(true);
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 
 const fetchDashboardData = async () => {
   try {
-    const response = await $apiClient.get(
-      "/api/v1/users/admin/dashBoard",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await $apiClient.get("/api/v1/users/admin/dashBoard", {
+      withCredentials: true,
+    });
 
     if (response) {
       eventTotal.value = response.data.data.events.length;

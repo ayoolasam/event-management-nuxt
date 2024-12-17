@@ -3,8 +3,26 @@
     <div
       v-for="(event, index) in events"
       :key="index"
-      class="bordesign w-full p-4 rounded-lg relative"
+      class="bordesign w-full event-box p-4 rounded-lg relative"
     >
+    <div
+        class="absolute font-bold icon-contain top-8 cursor-pointer flex gap-4 right-[6px] px-8 z-40"
+      >
+        <i
+          class="ri-edit-line"
+          @click="
+            editModal = true;
+            selectedEvent = event;
+          "
+        ></i>
+        <i
+          @click="
+            close = true;
+            selectedEvent = event;
+          "
+          class="ri-delete-bin-line text-red-400"
+        ></i>
+      </div>
       <div class="flex flex-col gap-4">
         <div class="w-full h-[180px]">
           <img
@@ -22,7 +40,7 @@
             {{ event.description }}
           </p>
         </div>
-        <div class="text-subText flex flex-wrap gap-8 text-sm">
+        <div class="text-subText sub flex flex-wrap gap-8 text-sm">
           <div class="flex gap-[5px]">
             <label>Capacity: </label>
 
@@ -47,24 +65,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="absolute right-[10px] cursor-pointer flex gap-4 bottom-4 px-8 z-40"
-      >
-        <i
-          class="ri-edit-line"
-          @click="
-            editModal = true;
-            selectedEvent = event;
-          "
-        ></i>
-        <i
-          @click="
-            close = true;
-            selectedEvent = event;
-          "
-          class="ri-delete-bin-line text-red-400"
-        ></i>
-      </div>
+    
     </div>
     <ctaModal
       v-if="close"
@@ -139,4 +140,19 @@ const deleteEvent = async () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@media (max-width:500px) {
+  
+
+  .event-box{
+  @apply text-xs
+  
+  }
+  .sub{
+    @apply text-xs
+  }
+}
+
+
+
+</style>

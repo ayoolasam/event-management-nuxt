@@ -4,12 +4,12 @@
 
     <TableLoader v-if="loading" />
     <div v-else class="">
-      <div class="mt-4 flex justify-between w-full rounded-tl-lg bordesign p-3">
-        <span class="font-medium text-2xs text-tableh">Users Table</span>
-        <div class="search-bar flex items-center w-[40%]">
+      <div class="mt-4 flex justify-between w-full rounded-t-lg  bordesign p-3">
+        <span class="font-medium text-sm sm:text-lg text-tableh">Users Table</span>
+        <div class="search-bar flex items-center w-[300px]">
           <input
             type="text"
-            class="w-[85%] px-[10px] py-[3px] bordesign bg-[#f2f2f2] placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500"
+            class="w-[85%] px-[10px] py-[3px] bordesign bg-[#f2f2f2] placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500 "
             placeholder="Search for Users.."
           />
           <i class="ri-search-line ml-[-25px] text-gray-500"></i>

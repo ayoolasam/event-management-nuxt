@@ -39,7 +39,7 @@ html {
   @apply px-6 py-6;
 }
 th {
-  @apply p-3 text-sm font-semibold tracking-wide text-left text-tableh;
+  @apply p-3 text-sm font-semibold tracking-wide text-left text-tableh whitespace-nowrap;
 }
 
 /* tr{
@@ -47,7 +47,7 @@ th {
 } */
 
 td {
-  @apply p-3   font-medium bg-white text-xs;
+  @apply p-3   font-medium bg-white text-xs whitespace-nowrap;
 }
 tr {
   @apply bordesign;

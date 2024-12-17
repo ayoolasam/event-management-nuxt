@@ -24,7 +24,7 @@
               <th>Purchased By</th>
               <th>Paid</th>
               <th>Status</th>
-              <th>No of Tickets</th>
+              <th class="whitespace-nowrap">No of Tickets</th>
 
               <th>Purchased On</th>
 
@@ -36,7 +36,7 @@
               <td class="text-gray-600 text-md capitalize">
                 {{ ticket.ticketCode }}
               </td>
-              <td class="text-gray-600 text-md">{{ ticket.event.name }}</td>
+              <td class="text-gray-600 text-md whitespace-nowrap">{{ ticket.event.name }}</td>
               <td class="flex gap-[8px] items-center">
                 <span
                   class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
@@ -51,11 +51,11 @@
                   </p>
                 </div>
               </td>
-              <td class="text-gray-600 text-md">
+              <td class="text-gray-600 text-md whitespace-nowrap">
                 {{ ticket.isPaid ? "Paid" : "Not Paid" }}
               </td>
 
-              <td class="text-center">
+              <td class="text-center whitespace-nowrap">
                 <span
                   :class="{
                     'badge-green': ticket.isUsed,
@@ -72,7 +72,7 @@
                   ticket.noOfTickets
                 }}</span>
               </td>
-              <td>{{ formatDate(ticket.purchasedAt) }}</td>
+              <td class="whitespace-nowrap">{{ formatDate(ticket.purchasedAt) }}</td>
               <!-- <td>{{ user.dateJoined }}</td> -->
               <td class="">
                 <i

@@ -139,22 +139,14 @@ const options = ref([
 </script>
 
 <style scoped>
-/* @media (max-width: 1050px) {
-  li {
-    font-size: 12px;
-  }
-  .arrow-box {
-    height: 30px;
-    width: 30px;
-    right: 7px;
-  }
-  .arrow {
-    display: flex;
-    justify-items: center;
-  }
-  .image-logo {
-    height: 30px;
-    width: 40px;
-  }
-} */
+@media (max-width: 697px) {
+aside{
+  @apply text-sm
+}
+}
+@media (max-width: 500px) {
+aside{
+  @apply text-xs
+}
+}
 </style>
