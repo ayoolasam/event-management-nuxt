@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="w-[35%] py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
+      class="w-full max-w-md py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -14,7 +14,7 @@
         <span>Below are details about this Event</span>
       </div>
       <div class="mt-4">
-        <table class="w-full h-full">
+        <table class=" h-full w-full">
           <tr class="">
             <td class="bordesign py-8 text-black text-[15px] font-semibold">
               Ticket ID

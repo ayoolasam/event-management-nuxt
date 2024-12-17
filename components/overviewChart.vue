@@ -53,13 +53,13 @@ export default {
 </script>
 
 <template>
-  <div class="rounded-xl shadow bg-white cursor-pointer bordesign">
+  <div class="rounded-xl shadow w-full bg-white cursor-pointer bordesign">
     <div
-      class="flex items-center justify-between px-6 py-3 font-[500] text-[18px] border-b"
+      class="flex cont flex-wrap gap-4 items-center w-full justify-between px-6 py-3 font-[500] text-[18px] border-b"
     >
       <h4 class="font-semibold text-[20px]">Overview</h4>
       <div
-        class="flex gap-[10px] font-Rubik font-medium text-[15px] text-primary"
+        class="flex gap-[10px] font-Rubik  font-medium text-[15px] text-primary"
       >
         <div class="flex items-center gap-[10px]">
           <div class="rounded-full w-[10px] h-[10px] bg-primary"></div>
@@ -76,3 +76,10 @@ export default {
     <Chart :chartData="chartData" :chartOptions="chartOptions" />
   </div>
 </template>
+<style scoped>
+@media (max-width:515px) {
+  .cont{
+    @apply text-xs
+  }
+}
+</style>

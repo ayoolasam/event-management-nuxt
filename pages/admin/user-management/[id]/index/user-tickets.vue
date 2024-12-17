@@ -2,9 +2,11 @@
   <div>
     <TableLoader v-if="loading" />
     <div v-else class="">
-      <div class="mt-4 flex justify-between w-full rounded-tl-lg bordesign p-3">
+      
+      <div class="overflow-x-auto no-scrollbar rounded-t-lg bordesign">
+        <div class="mt-4 flex justify-between gap-8 w-full h-full  p-3">
         <span class="font-medium text-2xs text-tableh">Tickets Table</span>
-        <div class="search-bar flex items-center w-[40%]">
+        <div class="search-bar flex items-center w-[500px]">
           <input
             type="text"
             class="w-[85%] px-[10px] py-[3px] bordesign bg-[#f2f2f2] placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500"
@@ -13,7 +15,6 @@
           <i class="ri-search-line ml-[-25px] text-gray-500"></i>
         </div>
       </div>
-      <div class="overflow-x-auto no-scrollbar">
         <table class="w-full">
           <thead class="bg-[#f2f2f2]">
             <tr>

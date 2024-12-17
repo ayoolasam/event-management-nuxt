@@ -34,7 +34,7 @@
         Color="user"
       />
     </div>
-    <div class="mt-16 bordesign">
+    <div class="mt-16  overflow-x-auto">
       <overview-chart />
     </div>
   </div>

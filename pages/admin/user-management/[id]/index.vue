@@ -13,7 +13,7 @@
 
     <div
       v-if="loading"
-      class="h-[160px] bordesign rounded-md gap-8 py-4flex px-4 flex items-center flex-wrap mt-12"
+      class="h-[160px] bordesign rounded-md gap-8 py-4 px-4 flex items-center mb-8 flex-wrap mt-8"
     >
       <div class="skeleton h-[120px] w-[120px] skeleton rounded-full"></div>
       <div class="class flex flex-col gap-4">
@@ -31,21 +31,23 @@
         class="h-[120px] rounded-full flex items-center gap-[5px] justify-center w-[120px] bg-[#f2f2f2]"
       >
         <span class="font-bold text-xl">
-          {{ user && user.name ? user.name[0] : '' }}
+          {{ user && user.name ? user.name[0] : "" }}
         </span>
-        <span class="font-bold text-xl"> {{ user && user.name ? user.name[0] : '' }}</span>
+        <span class="font-bold text-xl">
+          {{ user && user.name ? user.name[0] : "" }}</span
+        >
       </div>
 
       <div v-else class="rounded-full h-[120px] w-[120px]">
         <img
-          class=" h-full w-full  rounded-full object-cover object-center"
+          class="h-full w-full rounded-full object-cover object-center"
           :src="user?.imageUrl"
           alt="profile-picture"
         />
       </div>
       <div class="">
         <p class="font-semibold text-xl">{{ user.name }}</p>
-        <div class="flex gap-8 text-md text-subText text-sm">
+        <div class="flex flex-wrap gap-8 text-md text-subText text-sm">
           <span> <i class="ri-mail-line"></i> {{ user.email }}</span>
           <span> <i class="ri-phone-line"></i> 09078329726</span>
         </div>
@@ -60,7 +62,7 @@
       </div>
     </div>
 
-    <div class="flex mt-4 filterTabs gap-4 text-">
+    <div v-if="!loading" class="flex mt-8 filterTabs gap-4">
       <NuxtLink :to="`/admin/user-management/${user._id}/user-tickets`">
         <div
           @click="changeSubPage('Tickets')"
@@ -81,7 +83,7 @@
         </div>
       </NuxtLink>
     </div>
-    <div class="ctn">
+    <div class="ctn mt-4">
       <NuxtPage> </NuxtPage>
     </div>
   </div>
@@ -95,7 +97,7 @@ const id = route.params.id;
 const loading = ref(false);
 const user = ref({});
 const present = ref("Tickets");
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 const changeSubPage = (page) => {
   present.value = page;
 };
@@ -107,12 +109,9 @@ definePageMeta({
 const getUser = async () => {
   loading.value = true;
   try {
-    const response = await $apiClient.get(
-      `/api/v1/users/user/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await $apiClient.get(`/api/v1/users/user/${id}`, {
+      withCredentials: true,
+    });
 
     if (response) {
       user.value = response.data.data.user;

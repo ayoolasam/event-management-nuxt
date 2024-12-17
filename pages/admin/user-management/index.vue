@@ -4,7 +4,9 @@
 
     <TableLoader v-if="loading" />
     <div v-else class="">
-      <div class="mt-4 flex justify-between w-full rounded-t-lg  bordesign p-3">
+     
+      <div class="overflow-auto bordesign  rounded-t-lg no-scrollbar">
+        <div class="mt-4  flex justify-between gap-8 h-full  w-full   p-3">
         <span class="font-medium text-sm sm:text-lg text-tableh">Users Table</span>
         <div class="search-bar flex items-center w-[300px]">
           <input
@@ -15,7 +17,6 @@
           <i class="ri-search-line ml-[-25px] text-gray-500"></i>
         </div>
       </div>
-      <div class="overflow-auto no-scrollbar">
         <table class="w-full">
           <thead class="bg-[#f2f2f2]">
             <tr>

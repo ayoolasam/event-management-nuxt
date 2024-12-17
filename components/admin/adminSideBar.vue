@@ -2,9 +2,9 @@
   <aside
     :class="{
       'w-24': collapse,
-      'w-64': !collapse
+      'w-64': !collapse,
     }"
-    class="bg-primary shadow-sm h-full  flex flex-col gap-[50px] relative py-12 transition-all duration-700"
+    class="bg-primary shadow-sm h-full flex flex-col gap-[50px] relative py-12 transition-all duration-1000"
   >
     <div class="arrow">
       <div
@@ -36,8 +36,8 @@
         alt="logo"
       />
     </div>
-    <div class="link-section overflow-y-auto no-scrollbar h-[65%]">
-      <ul class="transition-all duration-700">
+    <div class="link-section overflow-y-auto no-scrollbar h-[65%] transition-all duration-1000">
+      <ul class="transition-all duration-1000">
         <li
           :class="{
             'flex justify-center': collapse,
@@ -140,13 +140,13 @@ const options = ref([
 
 <style scoped>
 @media (max-width: 697px) {
-aside{
-  @apply text-sm
-}
+  aside {
+    @apply text-sm;
+  }
 }
 @media (max-width: 500px) {
-aside{
-  @apply text-xs
-}
+  aside {
+    @apply text-xs;
+  }
 }
 </style>

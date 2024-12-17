@@ -1,6 +1,6 @@
 <template>
   <div class="h-full ctn no-scrollbar">
-    <div class="flex justify-between flex-wrap items-center">
+    <div class="flex cont justify-between flex-wrap items-center">
       <h1 class="font-semibold  lg:text-[28px] md:text-sm ">Event Management</h1>
       <div
         @click="toggleCreate"
@@ -84,4 +84,16 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style  scoped>
+
+@media (max-width:540px) {
+.cont{
+  flex-direction: column;
+  align-items: start;
+  gap:20px;
+}
+  
+}
+
+
+</style>
