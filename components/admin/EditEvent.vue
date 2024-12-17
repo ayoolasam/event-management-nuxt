@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="w-full nax-w-md py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
+      class="w-full max-w-md py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -73,7 +73,7 @@ import axios from "axios";
 const emit = defineEmits(["closeModal", "update"]);
 const props = defineProps(["event"]);
 const toast = useToast();
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 const name = ref(props.event.name);
 const date = ref(props.event.date);
 const capacity = ref(props.event.capacity);

@@ -2,8 +2,9 @@
   <aside
     :class="{
       'w-24': collapse,
+      'w-64': !collapse
     }"
-    class="bg-primary shadow-sm h-full w-64 flex flex-col gap-[50px] relative py-12 transition-all duration-700"
+    class="bg-primary shadow-sm h-full  flex flex-col gap-[50px] relative py-12 transition-all duration-700"
   >
     <div class="arrow">
       <div

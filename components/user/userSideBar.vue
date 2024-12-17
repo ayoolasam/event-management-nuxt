@@ -1,24 +1,59 @@
 <template>
   <aside
-    class="bg-primary h-full w-[20%] flex flex-col gap-[50px] py-12 rounded-tr-2xl"
+    :class="{
+      'w-24': collapse,
+      'w-64': !collapse,
+    }"
+    class="bg-primary shadow-sm h-full flex flex-col gap-[50px] relative py-12 transition-all duration-700"
   >
-    <div class="w-full flex items-center justify-center">
+    <div class="arrow">
+      <div
+        @click="isCollapsed"
+        class="absolute arrow-box shadow-3xl top-4 right-4 bg-white flex items-center justify-center h-[35px] w-[35px] rounded-full hover:scale-125 transition-all duration-300"
+      >
+        <i
+          v-if="!collapse"
+          class="ri-arrow-left-double-fill text-[25px] hover:scale-75 transition-all duration-300"
+        ></i>
+        <i
+          v-else
+          class="ri-arrow-right-double-line text-[25px] hover:scale-75 transition-all duration-300"
+        ></i>
+      </div>
+    </div>
+    <div
+      :class="{
+        'mt-12 px-[5px]': collapse,
+      }"
+      class="w-full flex items-center justify-center transition-all duration-700"
+    >
       <img
-        class="w-[70px] h-[40px]"
+        :class="{
+          'w-[26px] h-[25px]': collapse,
+        }"
+        class="w-[70px] h-[40px] image-logo"
         src="../../assets/images/logo-white.png"
         alt="logo"
       />
     </div>
     <div class="link-section overflow-y-auto no-scrollbar h-[65%]">
-      <ul class="">
+      <ul class="transition-all duration-700">
         <li
+          :class="{
+            'flex justify-center': collapse,
+          }"
           v-for="(item, index) in sideBarLinks"
           :key="index"
-          class="text-white flex py-4 items-center px-4 w-full hover:bg-white transition-all hover:text-primary duration-500 ease-in-out"
+          class="text-white flex py-4 items-center px-4 w-full hover:bg-white transition-all hover:text-primary duration-500 ease-in-out cursor-pointer"
         >
           <NuxtLink :to="item.to" class="flex gap-[10px]">
             <i :class="item.icon" class="sidebar-icon"></i>
-            <span>{{ item.text }}</span>
+            <span
+              :class="{
+                hidden: collapse,
+              }"
+              >{{ item.text }}</span
+            >
           </NuxtLink>
         </li>
       </ul>
@@ -27,13 +62,21 @@
     <div class="link-section">
       <ul class="">
         <li
+          :class="{
+            'flex justify-center': collapse,
+          }"
           v-for="(item, index) in options"
           :key="index"
           class="text-white flex py-4 items-center px-4 w-full hover:bg-white transition-all hover:text-primary duration-500 ease-in-out"
         >
           <NuxtLink :to="item.to" class="flex gap-[10px]">
             <i :class="item.icon" class="sidebar-icon"></i>
-            <span>{{ item.text }}</span>
+            <span
+              :class="{
+                hidden: collapse,
+              }"
+              >{{ item.text }}</span
+            >
           </NuxtLink>
         </li>
       </ul>
@@ -42,6 +85,11 @@
 </template>
 
 <script setup>
+const collapse = ref(false);
+const isCollapsed = () => {
+  collapse.value = !collapse.value;
+};
+
 const sideBarLinks = ref([
   {
     text: "Dashboard",
@@ -49,54 +97,64 @@ const sideBarLinks = ref([
     to: { name: "user-dashboard" },
   },
   {
-    text: "Browse Events",
+    text: "Event Management",
     icon: "ri-book-2-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "user-event-management" },
   },
+  // {
+  //   text: "User Managemen",
+  //   icon: "ri-group-line",
+  //   to: { name: "admin-user-management" },
+  // },
   {
-    text: "FeedBack and Support",
-    icon: "ri-group-line",
-    to: { name: "admin-dashboard" },
-  },
-  {
-    text: "Reports and Analytics",
+    text: "My Tickets",
     icon: "ri-file-chart-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "user-ticket-management" },
   },
   {
-    text: " Profile and Settings",
+    text: " My Transactions",
     icon: "ri-settings-3-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "user-transactions" },
   },
   {
     text: "Support and FeedBack",
     icon: "ri-feedback-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "user-dashboard" },
   },
   // {
-  //   text: "Support and FeedBack",
-  //   icon: "ri-dashboard-fill",
-  //   to: { name: "admin-dashboard" },
-  // },
-  // {
-  //   text: "Support and FeedBack",
-  //   icon: "ri-dashboard-fill",
-  //   to: { name: "admin-dashboard" },
-  // },
 ]);
 
 const options = ref([
   {
-    text: "Settings",
+    text: "Profile",
     icon: "ri-feedback-line",
-    to: { name: "admin-dashboard" },
+    to: { name: "user-profile" },
   },
-  {
-    text: "Log Out",
-    icon: "ri-logout-box-line",
-    to: { name: "admin-dashboard" },
-  },
+  // {
+  //   text: "Log Out",
+  //   icon: "ri-logout-box-line",
+  //   to: { name: "admin-dashboard" },
+  // },
 ]);
 </script>
 
-<style scoped></style>
+<style scoped>
+/* @media (max-width: 1050px) {
+  li {
+    font-size: 12px;
+  }
+  .arrow-box {
+    height: 30px;
+    width: 30px;
+    right: 7px;
+  }
+  .arrow {
+    display: flex;
+    justify-items: center;
+  }
+  .image-logo {
+    height: 30px;
+    width: 40px;
+  }
+} */
+</style>

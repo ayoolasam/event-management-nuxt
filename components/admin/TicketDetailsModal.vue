@@ -29,7 +29,9 @@
             <td class="bordesign py-8 text-[15px] font-semibold">
               Payment Status
             </td>
-            <td class="bordesig">{{ ticket.isPaid ? "Paid " : "Not Paid" }}</td>
+            <td class="bordesign">
+              {{ ticket.isPaid ? "Paid " : "Not Paid" }}
+            </td>
           </tr>
           <tr>
             <td class="bordesign py-8 text-[15px] font-semibold">
