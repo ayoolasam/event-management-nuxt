@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="w-[40%] py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[80%] bg-white rounded-md"
+      class="w-full max-w-md py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[80%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -57,7 +57,7 @@ const toast = useToast();
 const name = ref("");
 const email = ref("");
 const loading = ref(false);
-
+const { $apiClient } = useNuxtApp();
 const close = () => {
   emit("closeModal");
 };
@@ -76,11 +76,11 @@ const updateProfileDetails = async () => {
 
     if (email.value) {
       payload.email = email.value;
-      loading.value = false
+      loading.value = false;
     }
 
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/users/user/Update",
+    const response = await $apiClient.post(
+      "/api/v1/users/user/Update",
       payload,
       {
         withCredentials: true,

@@ -10,7 +10,7 @@
       </div>
       <div class="">
         <p class="font-semibold text-xl">{{ userStore.user.name }}</p>
-        <div class="flex gap-8 text-md text-subText text-sm">
+        <div class="flex gap-8 text-md text-subText text-sm flex-wrap">
           <span> <i class="ri-mail-line"></i> {{ userStore.user.email }}</span>
           <span> <i class="ri-phone-line"></i> 09078329726</span>
         </div>

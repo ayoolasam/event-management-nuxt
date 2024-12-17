@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div
-      class="w-[30%] py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
+      class="w-full nax-w-md py-4 no-scrollbar overflow-y-auto px-8 modal-content h-[90%] bg-white rounded-md"
     >
       <div
         class="close-icon rounded-full hover:scale-125 cursor-pointer transition-all duration-700 text-center flex justify-center items-center h-[40px] w-[40px] absolute bg-primary top-4 right-4"
@@ -16,34 +16,20 @@
       <div class="mt-4">
         <div>
           <label class="block">Name</label>
-          <input
-            class="inputDesign"
-            v-model="name"
-          />
+          <input class="inputDesign" v-model="name" />
         </div>
         <div class="mt-4">
           <label class="block">Date</label>
-          <input
-            type="date"
-            class="inputDesign"
-            v-model="date"
-          />
+          <input type="date" class="inputDesign" v-model="date" />
         </div>
 
         <div class="mt-4">
           <label class="block">Capacity</label>
-          <input
-            type="number"
-            class="inputDesign"
-            v-model="capacity"
-          />
+          <input type="number" class="inputDesign" v-model="capacity" />
         </div>
         <div class="mt-4">
           <label class="block">Category</label>
-          <select
-            class="inputDesign"
-            v-model="category"
-          >
+          <select class="inputDesign" v-model="category">
             <option v-for="(category, index) in categories" :key="index">
               {{ category }}
             </option>
@@ -52,24 +38,17 @@
 
         <div class="mt-4">
           <label class="block">location</label>
-          <input
-            class="inputDesign"
-            v-model="location"
-          />
+          <input class="inputDesign" v-model="location" />
         </div>
 
         <div class="mt-4">
           <label class="block">Price</label>
-          <input
-            type="text"
-            class="inputDesign"
-            v-model="price"
-          />
+          <input type="text" class="inputDesign" v-model="price" />
         </div>
         <div class="mt-4">
           <label class="block">Description</label>
           <textarea
-            class="w-full px-4 mt-[10px] py-8  bg-[#f2f2f2] focus:outline-none rounded-md bordesign text-sm"
+            class="w-full px-4 mt-[10px] py-8 bg-[#f2f2f2] focus:outline-none rounded-md bordesign text-sm"
             v-model="description"
           />
         </div>

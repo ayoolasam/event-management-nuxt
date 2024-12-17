@@ -1,9 +1,9 @@
 <template>
   <aside
     :class="{
-      'w-[6%]': collapse,
+      'w-24': collapse,
     }"
-    class="bg-primary shadow-sm h-full w-[20%] flex flex-col gap-[50px] relative py-12 transition-all duration-700"
+    class="bg-primary shadow-sm h-full w-64 flex flex-col gap-[50px] relative py-12 transition-all duration-700"
   >
     <div class="arrow">
       <div
@@ -138,7 +138,7 @@ const options = ref([
 </script>
 
 <style scoped>
-@media (max-width: 1050px) {
+/* @media (max-width: 1050px) {
   li {
     font-size: 12px;
   }
@@ -155,5 +155,5 @@ const options = ref([
     height: 30px;
     width: 40px;
   }
-}
+} */
 </style>
