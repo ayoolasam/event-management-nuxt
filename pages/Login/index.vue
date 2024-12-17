@@ -114,7 +114,7 @@ const LogIn = async () => {
     );
 
     if (response) {
-      await userStore.fetchUserDetails();
+      // await userStore.fetchUserDetails();
       userStore.loggedIn = true;
       loading.value = false;
       toast.success("Logged In Successfully");
