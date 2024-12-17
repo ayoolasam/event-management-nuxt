@@ -30,7 +30,7 @@
                 placeholder="Enter your Name"
               />
             </div> -->
-            <div class="form-group  w-full flex flex-col gap-[5px]">
+            <div class="form-group w-full flex flex-col gap-[5px]">
               <label class="block font-medium text-gray-500">Email</label>
               <input
                 class="inputDesign placeholder:text-[13px]"
@@ -39,9 +39,7 @@
                 v-model="email"
               />
             </div>
-            <div
-              class="form-group  w-full flex flex-col gap-[5px] relative"
-            >
+            <div class="form-group w-full flex flex-col gap-[5px] relative">
               <span
                 @click="showPassword()"
                 class="absolute right-4 top-4 text-[15px] cursor-pointer underline text-red-400"
@@ -71,9 +69,7 @@
                 >
               </NuxtLink>
               <NuxtLink :to="'forgotPassword'">
-                <span class="text-gray-600 text-[14px]"
-                  >Forgot Password?</span
-                >
+                <span class="text-gray-600 text-[14px]">Forgot Password?</span>
               </NuxtLink>
             </div>
           </div>
@@ -92,7 +88,7 @@ const show = ref(false);
 const toast = useToast();
 const userStore = useUserStore();
 const loading = ref(false);
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 
 const showPassword = () => {
   show.value = !show.value;
@@ -114,7 +110,7 @@ const LogIn = async () => {
     );
 
     if (response) {
-      // await userStore.fetchUserDetails();
+      await userStore.fetchUserDetails();
       userStore.loggedIn = true;
       loading.value = false;
       toast.success("Logged In Successfully");
@@ -137,9 +133,6 @@ const LogIn = async () => {
 </script>
 
 <style scoped>
-
-
-
 .inputDesign:focus {
   border-color: #3182ce;
   box-shadow: 0 0 0 1px #3182ce;
