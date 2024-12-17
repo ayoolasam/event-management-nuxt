@@ -1,81 +1,81 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-primary">
-    <div class="flex w-[950px] cont h-[550px] shadow-2xl">
-      <div class="flex-1 left">
+  <div class="min-h-screen bg-primary flex items-center justify-center p-4">
+    <div class="flex flex-col md:flex-row bg-white shadow-2xl rounded-lg w-full max-w-4xl overflow-hidden">
+  
+      <div class="hidden md:block md:w-1/2">
         <img
-          class="h-full w-full rounded-tl-lg rounded-bl-lg"
           src="../../assets/images/RegisterImage.jpg"
-          alt="LoginImage"
+          alt="RegisterImage"
+          class="w-full h-full object-cover"
         />
       </div>
 
-      <div class="flex-1 bg-white rounded-tr-lg rounded-br-lg flex py-8">
-        <div class="flex flex-col w-full">
-          <div class="text-center">
-            <span class="text-black font-semibold text-[25px]"
-              >Create an Account</span
-            >
+  
+      <div class="md:w-1/2 p-8 flex flex-col justify-center">
+        <h1 class="text-2xl font-semibold text-center mb-6">Create an Account</h1>
+
+        <div class="flex flex-col gap-4">
+       
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input
+              class="inputDesign w-full"
+              type="text"
+              placeholder="Enter your Name"
+              v-model="name"
+            />
           </div>
 
-          <div class="mt-4 flex flex-col gap-[15px]">
-            <div class="form-group px-8 w-full flex flex-col gap-[5px]">
-              <label class="block font-medium text-gray-500">Name</label>
-              <input
-                class="inputDesign placeholder:text-[13px]"
-                type="text"
-                placeholder="Enter your Name"
-                v-model="name"
-              />
-            </div>
-            <div class="form-group px-8 w-full flex flex-col gap-[5px]">
-              <label class="block font-medium text-gray-500">Username</label>
-              <input
-                class="inputDesign placeholder:text-[13px]"
-                type="text"
-                placeholder="Enter your username"
-                v-model="username"
-              />
-            </div>
-            <div class="form-group px-8 w-full flex flex-col gap-[5px]">
-              <label class="block font-medium text-gray-500">Email</label>
-              <input
-                class="inputDesign placeholder:text-[13px]"
-                type="text"
-                placeholder=" Enter Your Email"
-                v-model="email"
-              />
-            </div>
-            <div
-              class="form-group px-8 w-full flex flex-col gap-[5px] relative"
-            >
-              <span
-                @click="showPassword()"
-                class="absolute right-8 top-0 text-[15px] cursor-pointer underline text-red-400"
-              >
-                {{ show ? "Hide" : "Show" }}
-              </span>
-              <label class="block font-medium text-gray-500">Password</label>
-              <input
-                class="inputDesign placeholder:text-[13px]"
-                :type="show ? 'text' : 'password'"
-                placeholder=" Enter Your Password"
-                v-model="password"
-              />
-            </div>
+       
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+            <input
+              class="inputDesign w-full"
+              type="text"
+              placeholder="Enter your username"
+              v-model="username"
+            />
           </div>
-          <div class="flex items-center flex-col mt-8">
-            <button
-              class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium  transition-all duration-150"
-              @click="Register"
-            >
-              Create Account
-            </button>
-            <NuxtLink :to="'/Login'">
-              <span class="text-gray-600 text-[14px]">
-                Have an Account Login?</span
-              >
-            </NuxtLink>
+
+        
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              class="inputDesign w-full"
+              type="email"
+              placeholder="Enter your Email"
+              v-model="email"
+            />
           </div>
+
+          <div class="relative">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              :type="show ? 'text' : 'password'"
+              class="inputDesign w-full pr-16"
+              placeholder="Enter your Password"
+              v-model="password"
+            />
+            <span
+              @click="showPassword"
+              class="cursor-pointer text-sm text-blue-600 hover:underline absolute right-4 top-4"
+            >
+              {{ show ? 'Hide' : 'Show' }}
+            </span>
+          </div>
+        </div>
+
+        <button
+          @click="Register"
+          class="bg-primary text-white font-medium py-2 rounded-md mt-6 w-full hover:bg-primary-dark transition-all duration-150"
+        >
+          Create Account
+        </button>
+
+        <div class="text-center mt-4">
+          <NuxtLink to="/Login" class="text-sm text-gray-600 hover:underline">
+            Have an account? Login
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -84,25 +84,21 @@
 
 <script setup>
 import axios from "axios";
-
 const password = ref("");
 const show = ref(false);
 const name = ref("");
 const username = ref("");
 const email = ref("");
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 
 const showPassword = () => {
   show.value = !show.value;
 };
 
-
-
-
 const Register = async () => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/users/register",
+    const response = await $apiClient.post(
+      "/api/v1/users/register",
       {
         name: name.value,
         username: username.value,
@@ -115,41 +111,21 @@ const Register = async () => {
       console.log(response);
     }
   } catch (e) {
-    if (e.message.includes("Network")) {
-      toast.error("Please check your internet connection");
-    } else {
-      toast.error(e.response.data.message);
-    }
+    // You can add toast or error handling logic here
+    console.error(e);
   }
 };
 </script>
 
 <style scoped>
-@media (max-width: 984px) {
-  .left {
-    display: none;
-  }
-  .cont {
-    width: 500px;
-  }
+.inputDesign {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  outline: none;
 }
-
-
-
-@media (max-width: 560px) {
-  .left {
-    display: none;
-  }
-  .cont {
-    width: 400px;
-  }
-}
-@media (max-width: 560px) {
-  .left {
-    display: none;
-  }
-  .cont {
-    width: 340px;
-  }
+.inputDesign:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
 }
 </style>
