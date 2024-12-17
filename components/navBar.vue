@@ -41,7 +41,7 @@ const triggerLogOut = () => {
 };
 const getMe = async () => {
   try {
-    const response = await $apiClient.get("http://localhost:5000/api/v1/users/me", {
+    const response = await $apiClient.get("/api/v1/users/me", {
       withCredentials: true,
     });
 

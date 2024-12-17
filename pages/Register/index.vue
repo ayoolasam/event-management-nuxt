@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-primary flex items-center justify-center p-4">
-    <div class="flex flex-col md:flex-row bg-white shadow-2xl rounded-lg w-full max-w-4xl overflow-hidden">
+  <div class="min-h-screen bg-primary flex items-center justify-center p-8">
+    <div class="flex flex-col md:flex-row  bg-white shadow-2xl rounded-lg w-full max-w-4xl overflow-hidden">
   
       <div class="hidden md:block md:w-1/2">
         <img

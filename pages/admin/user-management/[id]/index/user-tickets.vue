@@ -70,7 +70,9 @@
                   ticket.noOfTickets
                 }}</span>
               </td>
-              <td class="whitespace-nowrap">{{ formatDate(ticket.purchasedAt) }}</td>
+              <td class="whitespace-nowrap">
+                {{ formatDate(ticket.purchasedAt) }}
+              </td>
               <!-- <td>{{ user.dateJoined }}</td> -->
               <td class="">
                 <i
@@ -127,6 +129,7 @@ const loading = ref(true);
 const tickets = ref([]);
 const ticketDetails = ref(false);
 const route = useRoute();
+const { $apiClient } = useNuxtApp();
 
 const showMore = (index) => {
   show.value = !show.value;
@@ -145,8 +148,8 @@ const formatDate = (dateString) => {
 
 const getUserTickets = async () => {
   try {
-    const response = await axios.get(
-      `http://localhost:5000/api/v1/users/tickets/user/${route.params.id}`,
+    const response = await $apiClient.get(
+      `/api/v1/users/tickets/user/${route.params.id}`,
       {
         withCredentials: true,
       }

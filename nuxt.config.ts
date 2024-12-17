@@ -2,7 +2,8 @@
 export default defineNuxtConfig({
 runtimeConfig:{
   public: {
-    apiBaseUrl:'http://localhost:5000'
+    // apiBaseUrl:'http://localhost:5000'
+     apiBaseUrl:'https://event-management-express.onrender.com'
 },
 
 },

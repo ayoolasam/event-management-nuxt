@@ -73,6 +73,7 @@ import axios from "axios";
 const emit = defineEmits(["closeModal", "update"]);
 const props = defineProps(["event"]);
 const toast = useToast();
+const {$apiClient} = useNuxtApp()
 const name = ref(props.event.name);
 const date = ref(props.event.date);
 const capacity = ref(props.event.capacity);
@@ -116,8 +117,8 @@ const updatePage = () => {
 const createEvent = async () => {
   loading.value = true;
   try {
-    const response = await axios.post(
-      "http://localhost:5000/api/v1/events/create",
+    const response = await $apiClient.post(
+      "/api/v1/events/create",
       {
         name: name.value,
         date: date.value,

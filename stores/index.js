@@ -9,13 +9,11 @@ export const useUserStore = defineStore({
   }),
   actions: {
     async fetchUserDetails() {
+      const { $apiClient } = useNuxtApp();
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/users/me",
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await $apiClient.get("/api/v1/users/me", {
+          withCredentials: true,
+        });
 
         if (response) {
           this.user = response.data.data.user;

@@ -14,7 +14,7 @@
       <div
         class="flex-1 bg-white rounded-tr-lg justify-center rounded-br-lg flex py-8"
       >
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col px-8 w-full">
           <div class="text-center">
             <span class="text-black font-semibold text-[25px]">Login</span>
           </div>
@@ -30,7 +30,7 @@
                 placeholder="Enter your Name"
               />
             </div> -->
-            <div class="form-group px-8 w-full flex flex-col gap-[5px]">
+            <div class="form-group  w-full flex flex-col gap-[5px]">
               <label class="block font-medium text-gray-500">Email</label>
               <input
                 class="inputDesign placeholder:text-[13px]"
@@ -40,11 +40,11 @@
               />
             </div>
             <div
-              class="form-group px-8 w-full flex flex-col gap-[5px] relative"
+              class="form-group  w-full flex flex-col gap-[5px] relative"
             >
               <span
                 @click="showPassword()"
-                class="absolute right-8 top-0 text-[15px] cursor-pointer underline text-red-400"
+                class="absolute right-4 top-4 text-[15px] cursor-pointer underline text-red-400"
               >
                 {{ show ? "Hide" : "Show" }}
               </span>
@@ -57,9 +57,9 @@
               />
             </div>
 
-            <div class="flex items-center flex-col mt-8">
+            <div class="flex items-center w-full flex-col mt-8">
               <button
-                class="bg-primary px-24 py-[8px] rounded-xl text-white shadow-md font-medium transition-all duration-150"
+                class="bg-primary px-24 w-full h-12 rounded-xl flex items-center justify-center text-white shadow-md font-medium transition-all duration-150"
                 @click="LogIn"
               >
                 <MazSpinner v-if="loading" class="h-[35px]" color="white" />
@@ -137,6 +137,13 @@ const LogIn = async () => {
 </script>
 
 <style scoped>
+
+
+
+.inputDesign:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
 @media (max-width: 984px) {
   .left {
     display: none;
