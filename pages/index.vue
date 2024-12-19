@@ -20,10 +20,13 @@
       </div>
     </section>
 
-    <section class="py-6  px-12">
-      <h class="font-bold text-xl">Trending</h>
-      <div class="overflow-x-auto w-full flex  mt-4 no-scrollbar">
-        <div class="flex   gap-4">
+
+   
+    <section class="py-6 px-8 ">
+      <h class="font-bold text-xl px-8 ">Trending</h>
+      <div class="flex items-center justify-center">
+      <div class="overflow-x-auto transition-all duration-500  w-[80%] flex mt-4 no-scrollbar">
+        <div class="flex gap-4 duration-700 transition-all ">
           <div
             v-for="(event, index) in events"
             :key="index"
@@ -40,13 +43,19 @@
               <p class="text-sm font-bold">{{ event.name }}</p>
 
               <p class="text-xs">{{ event.description }}</p>
-              <span class="text-xs font-bold"> NGN  {{ event.price }}</span>
-              <p class="text-xs font-bold">Happening On: {{ formatDate(event.date) }}</p>
-              <p class="text-xs"> <i class="ri-map-pin-line"></i> {{ event.location  }}</p>
+              <span class="text-xs font-bold"> NGN {{ event.price }}</span>
+              <p class="text-xs font-bold">
+                Happening On: {{ formatDate(event.date) }}
+              </p>
+              <p class="text-xs">
+                <i class="ri-map-pin-line"></i> {{ event.location }}
+              </p>
             </div>
           </div>
         </div>
+       
       </div>
+    </div>
     </section>
     <footer class="bg-[#1e1e1e] px-12 py-16 flex flex-col gap-[30px]">
       <div class="flex footer-body flex-wrap justify-between">
@@ -188,6 +197,19 @@ onMounted(() => {
   background-position: center;
 }
 
+.animate {
+  animation: loop-scroll 20s linear infinite;
+}
+
+@keyframes loop-scroll {
+  0% {
+    transform: translateX(80%);
+  }
+
+  100% {
+    transform: translateX(-20%);
+  }
+}
 @media (max-width: 900px) {
   .footer-body {
     display: flex;
