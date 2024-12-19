@@ -12,7 +12,7 @@
           </p>
           <div class="flex justify-center">
             <input
-              class="w-[30%] rounded-lg p-3 bg-[#ededed] focus:outline-none placeholder:text-[14px] placeholder:text-gray-500 placeholder:font-medium"
+              class="w-full max-w-sm rounded-lg px-4 h-12 bg-[#ededed] focus:outline-none placeholder:text-[14px] placeholder:text-gray-500 placeholder:font-medium"
               placeholder="What do you want to see Live?"
             />
           </div>
@@ -20,29 +20,33 @@
       </div>
     </section>
 
-    <section class="py-6 px-6">
-      <MazCarousel :hideScrollbar="true" class="no-scrollbar">
-        <template #title>
-          <h4 class="maz-m-0 font-poppins font-bold text-[20px]">
-            Trending Events
-          </h4>
-        </template>
-        <MazCard
-          v-for="(item, i) in Array(8)"
-          :key="i"
-          :images="['https://loremflickr.com/250/300']"
-          style="min-width: 300px"
-        >
-          <template #title>
-            <h4 class="maz-m-0">Music Fest 2024</h4>
-          </template>
-          <template #content>
-            <p class="maz-text-muted" style="margin-bottom: 0">
-              Experience the thrill of live music from top bands.
-            </p>
-          </template>
-        </MazCard>
-      </MazCarousel>
+    <section class="py-6  px-12">
+      <h class="font-bold text-xl">Trending</h>
+      <div class="overflow-x-auto w-full flex  mt-4 no-scrollbar">
+        <div class="flex   gap-4">
+          <div
+            v-for="(event, index) in events"
+            :key="index"
+            class="p-4 flex flex-col gap-[10px] w-[380px] h-[300px] bordesign rounded-md"
+          >
+            <div class="rounded-md h-[150px]">
+              <img
+                :src="event.imageUrl"
+                class="h-full rounded-md w-full"
+                alt=""
+              />
+            </div>
+            <div>
+              <p class="text-sm font-bold">{{ event.name }}</p>
+
+              <p class="text-xs">{{ event.description }}</p>
+              <span class="text-xs font-bold"> NGN  {{ event.price }}</span>
+              <p class="text-xs font-bold">Happening On: {{ formatDate(event.date) }}</p>
+              <p class="text-xs"> <i class="ri-map-pin-line"></i> {{ event.location  }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <footer class="bg-[#1e1e1e] px-12 py-16 flex flex-col gap-[30px]">
       <div class="flex footer-body flex-wrap justify-between">
@@ -133,7 +137,48 @@
 
 <script setup>
 import mainNav from "~/components/mainNav.vue";
-import MazCarousel from "maz-ui/components/MazCarousel";
+
+import eventList from "~/components/user/eventList.vue";
+import { useToast } from "maz-ui";
+
+const toast = useToast();
+const events = ref([]);
+const loading = ref(true);
+
+const { $apiClient } = useNuxtApp();
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long", // "short" for abbreviated month
+    day: "2-digit",
+  });
+};
+
+const getEvents = async () => {
+  try {
+    loading.value = true;
+    const response = await $apiClient.get("/api/v1/events", {
+      withCredentials: true,
+    });
+
+    if (response) {
+      events.value = response.data.data.events;
+      loading.value = false;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.message);
+    }
+  }
+};
+
+onMounted(() => {
+  getEvents();
+});
 </script>
 
 <style scoped>
