@@ -1,10 +1,13 @@
 <template>
   <div class="ctn h-full no-scrollbar">
-    <div class="bg-primary text-white py-4  px-4 rounded-xl shadow-lg">
+    <div class="bg-primary text-white py-4 px-4 rounded-xl shadow-lg">
       Welcome Admin!
     </div>
     <div v-if="loading" class="w-full h-[160px] rounded-md mt-4 skeleton"></div>
-    <div v-else class="lg:grid-cols-4 gap-4 grid md:grid-cols-2 sm:grid-cols-1 mt-4">
+    <div
+      v-else
+      class="lg:grid-cols-4 gap-4 grid md:grid-cols-2 sm:grid-cols-1 mt-4"
+    >
       <cardBox
         Title1="Amount Of"
         Title2="Tickets"
@@ -22,7 +25,7 @@
       <cardBox
         Title1="Total"
         Title2="Income"
-        Amount="20,000"
+        :Amount="formatNumber(amountTotal)"
         :image="Stack"
         Color="Stack"
       />
@@ -34,7 +37,7 @@
         Color="user"
       />
     </div>
-    <div class="mt-16  overflow-x-auto">
+    <div class="mt-16 overflow-x-auto">
       <overview-chart />
     </div>
   </div>
@@ -57,8 +60,13 @@ const toast = useToast();
 const usersTotal = ref("");
 const eventTotal = ref("");
 const ticketTotal = ref(null);
+const amountTotal = ref("");
 const loading = ref(true);
 const { $apiClient } = useNuxtApp();
+
+function formatNumber(number) {
+  return new Intl.NumberFormat("en-US").format(number);
+}
 
 const fetchDashboardData = async () => {
   try {
@@ -70,6 +78,7 @@ const fetchDashboardData = async () => {
       eventTotal.value = response.data.data.events.length;
       ticketTotal.value = response.data.data.tickets.length;
       usersTotal.value = response.data.data.users.length;
+      amountTotal.value = response.data.data.totalMoney;
       loading.value = false;
     }
   } catch (e) {
