@@ -33,11 +33,7 @@
           <tbody>
             <tr v-for="(transaction, index) in transactions" :key="index">
               <td class="text-gray-600 text-md">{{ transaction.reference }}</td>
-              <!-- <td>
-                <span class="font-normal text-gray-600">{{
-                  transaction.event.name
-                }}</span>
-              </td> -->
+
               <td class="flex gap-[8px] items-center">
                 <span
                   class="h-[40px] w-[40px] flex justify-center items-center uppercase bg-gray-400 rounded-full"
@@ -72,7 +68,7 @@
                 }}</span>
               </td>
               <td>{{ formatDate(transaction.transactionDate) }}</td>
-              <!-- <td>{{ user.dateJoined }}</td> -->
+
               <td class="">
                 <i
                   @click.stop="showMore(index)"
@@ -80,7 +76,7 @@
                 >
                   <div
                     v-if="show && showIndex === index"
-                    class="w-[200px] absolute top-[5px] actions-menu right-4 bordesign bg-white text-[16px] shadow-md font-normal rounded-xl"
+                    class="w-[201px] absolute top-[5px] actions-menu right-4 bordesign bg-white text-[16px] shadow-md font-normal rounded-xl"
                   >
                     <p
                       class="w-full rounded-tr-lg rounded-tl-lg flex justify-center gap-4 text-center py-[13px] border-b hover:bg-[#f2f2f2]"
@@ -116,9 +112,8 @@
 </template>
 
 <script setup>
-import { MazBtn } from "maz-ui/components";
 import TableLoader from "~/components/TableLoader.vue";
-import axios from "axios";
+
 import { useToast } from "maz-ui";
 import TransactionDetails from "~/components/admin/TransactionDetails.vue";
 const { $apiClient } = useNuxtApp();
