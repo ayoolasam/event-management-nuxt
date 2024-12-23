@@ -48,7 +48,7 @@
       <div v-if="loading" class="skeleton w-full h-[300px] mt-4"></div>
       <div v-else class="flex items-center justify-center">
         <div
-          class="overflow-x-auto transition-all duration-500 w-[80%] flex mt-4 no-scrollbar"
+          class="overflow-x-auto transition-all duration-500 w-full] flex mt-4 no-scrollbar"
         >
           <div class="flex gap-4 duration-700 transition-all">
             <div
