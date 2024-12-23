@@ -19,9 +19,16 @@
             />
             <div
               v-if="dropDown"
-              class="absolute overflow-y-auto h-[150px] w-[400px] bordesign rounded-lg top-12 bg-white"
+              class="absolute overflow-y-auto no-scrollBar cursor-pointer h-[150px] w-[400px] bordesign rounded-lg top-12 bg-white"
             >
-              <ul class="w-full">
+              <div
+                v-if="sLoading"
+                class="flex h-full w-full items-center justify-center"
+              >
+                <MazSpinner class="" />
+              </div>
+
+              <ul v-else class="w-full">
                 <li
                   class="text-xs underline flex justify-start px-4 w-full hover:text-red-300 py-4"
                   v-for="(event, index) in searchedEvents"
@@ -173,6 +180,7 @@ const dropDown = ref(false);
 const searchedEvents = ref([]);
 let searchTimeout = null;
 const keyword = ref("");
+const sLoading = ref(false);
 
 const { $apiClient } = useNuxtApp();
 
@@ -211,13 +219,19 @@ const getEvents = async () => {
 
 const handleSearch = () => {
   if (searchTimeout) clearTimeout(searchTimeout);
+  if (!keyword.value.trim()) {
+    searchedEvents.value = [];
+    dropDown.value = false;
+
+    return;
+  }
   searchTimeout = setTimeout(() => {
     searchEvents();
   }, 500);
 };
 const searchEvents = async () => {
   try {
-    showDropDown.value = true;
+    sLoading.value = true;
     const response = await $apiClient.get(
       `/api/v1/events?keyword=${keyword.value}`,
       {
@@ -227,10 +241,13 @@ const searchEvents = async () => {
 
     if (response) {
       searchedEvents.value = response.data.data.events;
+
       dropDown.value = true;
+      sLoading.value = false;
     }
   } catch (e) {
     if (e.message.includes("Network")) {
+      dropDown.value = false;
       toast.error("Please check your internet connection");
     } else {
       toast.error(e.message);
