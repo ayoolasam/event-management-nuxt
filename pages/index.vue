@@ -10,52 +10,68 @@
           <p class="text-white font-bold text-[20px] herosub font-poppins">
             Your next best Event is Waiting
           </p>
-          <div class="flex justify-center">
+          <div class="flex justify-center relative">
             <input
-              class="w-full max-w-sm rounded-lg px-4 h-12 bg-[#ededed] focus:outline-none placeholder:text-[14px] placeholder:text-gray-500 placeholder:font-medium"
+              @input="handleSearch"
+              v-model="keyword"
+              class="w-full max-w-sm px-4 rounded-lg h-12 bg-[#ededed] searchBar focus:outline-none placeholder:text-[14px] placeholder:text-gray-500 placeholder:font-medium"
               placeholder="What do you want to see Live?"
             />
+            <div
+              v-if="dropDown"
+              class="absolute overflow-y-auto h-[150px] w-[400px] bordesign rounded-lg top-12 bg-white"
+            >
+              <ul class="w-full">
+                <li
+                  class="text-xs underline flex justify-start px-4 w-full hover:text-red-300 py-4"
+                  v-for="(event, index) in searchedEvents"
+                  :key="index"
+                >
+                  {{ event.name }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="py-6 px-8">
+      <h1 class="font-bold text-xl px-8">Trending</h1>
+      <div v-if="loading" class="skeleton w-full h-[300px] mt-4"></div>
+      <div v-else class="flex items-center justify-center">
+        <div
+          class="overflow-x-auto transition-all duration-500 w-[80%] flex mt-4 no-scrollbar"
+        >
+          <div class="flex gap-4 duration-700 transition-all">
+            <div
+              v-for="(event, index) in events"
+              :key="index"
+              class="p-4 flex flex-col gap-[10px] w-[380px] h-[300px] bordesign rounded-md"
+            >
+              <div class="rounded-md h-[150px]">
+                <img
+                  :src="event.imageUrl"
+                  class="h-full rounded-md w-full"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p class="text-sm font-bold">{{ event.name }}</p>
 
-   
-    <section class="py-6 px-8 ">
-      <h class="font-bold text-xl px-8 ">Trending</h>
-      <div class="flex items-center justify-center">
-      <div class="overflow-x-auto transition-all duration-500  w-[80%] flex mt-4 no-scrollbar">
-        <div class="flex gap-4 duration-700 transition-all ">
-          <div
-            v-for="(event, index) in events"
-            :key="index"
-            class="p-4 flex flex-col gap-[10px] w-[380px] h-[300px] bordesign rounded-md"
-          >
-            <div class="rounded-md h-[150px]">
-              <img
-                :src="event.imageUrl"
-                class="h-full rounded-md w-full"
-                alt=""
-              />
-            </div>
-            <div>
-              <p class="text-sm font-bold">{{ event.name }}</p>
-
-              <p class="text-xs">{{ event.description }}</p>
-              <span class="text-xs font-bold"> NGN {{ event.price }}</span>
-              <p class="text-xs font-bold">
-                Happening On: {{ formatDate(event.date) }}
-              </p>
-              <p class="text-xs">
-                <i class="ri-map-pin-line"></i> {{ event.location }}
-              </p>
+                <p class="text-xs">{{ event.description }}</p>
+                <span class="text-xs font-bold"> NGN {{ event.price }}</span>
+                <p class="text-xs font-bold">
+                  Happening On: {{ formatDate(event.date) }}
+                </p>
+                <p class="text-xs">
+                  <i class="ri-map-pin-line"></i> {{ event.location }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-       
       </div>
-    </div>
     </section>
     <footer class="bg-[#1e1e1e] px-12 py-16 flex flex-col gap-[30px]">
       <div class="flex footer-body flex-wrap justify-between">
@@ -153,6 +169,10 @@ import { useToast } from "maz-ui";
 const toast = useToast();
 const events = ref([]);
 const loading = ref(true);
+const dropDown = ref(false);
+const searchedEvents = ref([]);
+let searchTimeout = null;
+const keyword = ref("");
 
 const { $apiClient } = useNuxtApp();
 
@@ -165,6 +185,10 @@ const formatDate = (dateString) => {
   });
 };
 
+const showDropDown = () => {
+  dropDown.value = !dropDown.value;
+};
+
 const getEvents = async () => {
   try {
     loading.value = true;
@@ -175,6 +199,35 @@ const getEvents = async () => {
     if (response) {
       events.value = response.data.data.events;
       loading.value = false;
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.message);
+    }
+  }
+};
+
+const handleSearch = () => {
+  if (searchTimeout) clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchEvents();
+  }, 500);
+};
+const searchEvents = async () => {
+  try {
+    showDropDown.value = true;
+    const response = await $apiClient.get(
+      `/api/v1/events?keyword=${keyword.value}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      searchedEvents.value = response.data.data.events;
+      dropDown.value = true;
     }
   } catch (e) {
     if (e.message.includes("Network")) {
@@ -218,12 +271,15 @@ onMounted(() => {
   }
 }
 
-@media screen {
+@media (max-width: 500px) {
   .hero-header {
-    font-size: 35px;
+    font-size: 30px;
   }
   .herosub {
-    font-size: 18px;
+    font-size: 14px;
+  }
+  .searchBar {
+    @apply max-w-xs;
   }
 }
 </style>
