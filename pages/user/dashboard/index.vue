@@ -4,7 +4,7 @@
       Welcome Back {{ userStore.user.name }}
     </div>
     <div v-if="loading" class="w-full h-[160px] rounded-md mt-4 skeleton"></div>
-    <div v-else class="flex gap-[10px] flex-wrap mt-4">
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-[10px]  mt-4">
       <cardBox
         Title1="Amount Of"
         Title2="Tickets"
