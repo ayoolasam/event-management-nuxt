@@ -18,8 +18,16 @@
         }}</span>
       </div>
       <div class="flex gap-[8px] items-center">
-        <div class="h-[40px] w-[40px] bg-green-400 rounded-full">
-          <img class="h-full w-full object-cover object-center rounded-full" :src="userStore.user.imageUrl" alt="user-photo" />
+        <div class="h-[40px] w-[40px] bordesign rounded-full">
+          <div v-if="!userStore.user.imageUrl" class="h-full rounded-full flex items-center justify-center w-full">
+            {{ userStore.user.name[0] }}
+          </div>
+          <img
+          v-else
+            class="h-full w-full object-cover object-center rounded-full"
+            :src="userStore.user.imageUrl"
+            alt="user-photo"
+          />
         </div>
 
         <i class="ri-arrow-down-s-line"></i>
@@ -33,7 +41,7 @@ import axios from "axios";
 import { useToast } from "maz-ui";
 const userStore = useUserStore();
 const logOut = ref(false);
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 
 const toast = useToast();
 const triggerLogOut = () => {
@@ -60,12 +68,9 @@ const getMe = async () => {
 
 const LogOut = async () => {
   try {
-    const response = await $apiClient.get(
-      "/api/v1/users/LogOut",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await $apiClient.get("/api/v1/users/LogOut", {
+      withCredentials: true,
+    });
 
     if (response) {
       userStore.$reset();
