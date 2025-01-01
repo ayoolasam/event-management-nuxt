@@ -28,9 +28,16 @@
 
               <th>Purchased On</th>
 
-              <th>Actions</th>
+              <th>Action</th>
             </tr>
           </thead>
+          <tbody>
+            <tr v-if="!loading && tickets.length === 0">
+              <td class="text-center text-lg font-bold" colspan="8">
+                No Tickets Found
+              </td>
+            </tr>
+          </tbody>
           <tbody>
             <tr v-for="(ticket, index) in tickets" :key="index">
               <td class="text-gray-600 text-md capitalize">
@@ -130,7 +137,6 @@
 </template>
 
 <script setup>
-import { MazBtn } from "maz-ui/components";
 import TableLoader from "~/components/TableLoader.vue";
 import TicketDetailsModal from "~/components/admin/TicketDetailsModal.vue";
 import ctaModal from "~/components/ctaModal.vue";

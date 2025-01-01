@@ -30,7 +30,12 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-if="!loading && transactions.length === 0">
+            <tr>
+              <td class="text-center text-lg font-bold" colspan="8">No Transactions Found</td>
+            </tr>
+          </tbody>
+          <tbody v-else>
             <tr v-for="(transaction, index) in transactions" :key="index">
               <td class="text-gray-600 text-md">{{ transaction.reference }}</td>
 

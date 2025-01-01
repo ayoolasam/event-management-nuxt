@@ -1,10 +1,10 @@
 <template>
   <div class="h-full ctn no-scrollbar">
     <div class="flex cont justify-between flex-wrap items-center">
-      <h1 class="font-semibold  lg:text-[28px] md:text-sm ">Event Management</h1>
+      <h1 class="font-semibold lg:text-[28px] md:text-sm">Event Management</h1>
       <div
         @click="toggleCreate"
-        class="bg-primary cursor-pointer text-white px-8 rounded-md shadow-md text-center py-[5px] text-xs lg:text-md md:text-sm sm:py-[6px]   md:py-[5px] lg:py-[10px]"
+        class="bg-primary cursor-pointer text-white px-8 rounded-md shadow-md text-center py-[5px] text-xs lg:text-md md:text-sm sm:py-[6px] md:py-[5px] lg:py-[10px]"
       >
         Create Event
       </div>
@@ -17,6 +17,7 @@
         :key="n"
         class="skeleton w-full h-[120px] rounded-md mt-4"
       ></div>
+     
 
       <div v-else class="flex flex-col gap-8">
         <EventList :events="events" @update="getEvents" />
@@ -47,7 +48,7 @@ const close = ref(false);
 const selectedEvent = ref({});
 const editModal = ref(false);
 const dLoading = ref(false);
-const {$apiClient} = useNuxtApp()
+const { $apiClient } = useNuxtApp();
 const toggleCreate = () => {
   create.value = !create.value;
 };
@@ -84,16 +85,12 @@ onMounted(() => {
 });
 </script>
 
-<style  scoped>
-
-@media (max-width:540px) {
-.cont{
-  flex-direction: column;
-  align-items: start;
-  gap:20px;
+<style scoped>
+@media (max-width: 540px) {
+  .cont {
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+  }
 }
-  
-}
-
-
 </style>

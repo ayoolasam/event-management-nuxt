@@ -4,19 +4,20 @@
 
     <TableLoader v-if="loading" />
     <div v-else class="">
-     
-      <div class="overflow-auto bordesign  rounded-t-lg no-scrollbar">
-        <div class="mt-4  flex justify-between gap-8 h-full  w-full   p-3">
-        <span class="font-medium text-sm sm:text-lg text-tableh">Users Table</span>
-        <div class="search-bar flex items-center w-[300px]">
-          <input
-            type="text"
-            class="w-[85%] px-[10px] py-[3px] bordesign bg-[#f2f2f2] placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500 "
-            placeholder="Search for Users.."
-          />
-          <i class="ri-search-line ml-[-25px] text-gray-500"></i>
+      <div class="overflow-auto bordesign rounded-t-lg no-scrollbar">
+        <div class="mt-4 flex justify-between gap-8 h-full w-full p-3">
+          <span class="font-medium text-sm sm:text-lg text-tableh"
+            >Users Table</span
+          >
+          <div class="search-bar flex items-center w-[300px]">
+            <input
+              type="text"
+              class="w-[85%] px-[10px] py-[3px] bordesign bg-[#f2f2f2] placeholder:text-xs focus:w-[100%] rounded-md focus:outline-none transition-all duration-500"
+              placeholder="Search for Users.."
+            />
+            <i class="ri-search-line ml-[-25px] text-gray-500"></i>
+          </div>
         </div>
-      </div>
         <table class="w-full">
           <thead class="bg-[#f2f2f2]">
             <tr>
@@ -29,6 +30,11 @@
               <th>Actions</th>
             </tr>
           </thead>
+          <tbody v-if="!loading && users.length === 0">
+            <tr>
+              <td class="text-center" colspan="8">No Users Found</td>
+            </tr>
+          </tbody>
           <tbody>
             <tr v-for="(user, index) in users" :key="index">
               <td class="text-gray-600 text-md">{{ user.uniqueID }}</td>
