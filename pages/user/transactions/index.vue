@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full ctn">
+  <div class="h-full fade-in ctn">
     <h1 class="font-bold text-[25px]">My Transactions</h1>
 
     <TableLoader v-if="loading" />
@@ -32,7 +32,9 @@
           </thead>
           <tbody v-if="!loading && transactions.length === 0">
             <tr>
-              <td class="text-center text-lg font-bold" colspan="8">No Transactions Found</td>
+              <td class="text-center text-lg font-bold" colspan="8">
+                No Transactions Found
+              </td>
             </tr>
           </tbody>
           <tbody v-else>

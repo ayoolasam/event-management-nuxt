@@ -1,5 +1,5 @@
 <template>
-  <div class="ctn h-full no-scrollbar">
+  <div class="ctn h-full  fade-in no-scrollbar">
     <div class="bg-primary text-white py-4 px-4 rounded-xl shadow-lg">
       Welcome Admin!
     </div>

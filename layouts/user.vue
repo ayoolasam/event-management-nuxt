@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-screen h-screen">
-  <userSideBar/>
-    <div class="w-full h-full overflow-y-auto">
+    <userSideBar />
+    <div class="w-full h-full  overflow-y-auto">
       <navBar />
       <slot></slot>
     </div>

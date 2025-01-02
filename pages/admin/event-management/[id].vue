@@ -1,5 +1,5 @@
 <template>
-  <div class="ctn">
+  <div class="ctn  fade-in">
 <NuxtLink :to="`/admin/event-management`">
   <div class="flex items-center gap-[10px] mb-8">
       <div class="w-[40px] flex items-center justify-center cursor-pointer h-[40px] bg-[#f2f2f2] rounded-full bordesign ">

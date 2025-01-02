@@ -1,6 +1,6 @@
 <template>
-  <div class="ctn">
-    <div class="py-8 bordesign rounded-md gap-8 flex px-4 flex-wrap mt-12">
+  <div class="ctn  fade-in">
+    <div class="py-8 bordesign  rounded-md gap-8 flex px-4 flex-wrap mt-12">
       <div class="rounded-full h-[120px] w-[120px]">
         <div
           v-if="!userStore.user.imageUrl"

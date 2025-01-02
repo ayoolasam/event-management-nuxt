@@ -1,5 +1,5 @@
 <template>
-  <div class="ctn">
+  <div class="ctn  fade-in">
     <NuxtLink :to="`/admin/user-management`">
       <div class="flex items-center gap-[10px] mb-8">
         <div

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full ctn">
+  <div class="h-full  fade-in ctn">
     <h1 class="font-bold text-[25px]">Transactions</h1>
 
     <TableLoader v-if="loading" />

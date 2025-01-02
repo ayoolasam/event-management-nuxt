@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full ctn no-scrollbar">
+  <div class="h-full  fade-in ctn no-scrollbar">
     <div class="flex cont justify-between flex-wrap items-center">
       <h1 class="font-semibold lg:text-[28px] md:text-sm">Event Management</h1>
       <div

@@ -90,3 +90,20 @@ tbody {
 .bordesign {
   @apply border-[1px] border-borderColor;
 }
+
+.fade-in {
+  animation: fade-in 0.8s ease-in-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(400px) scale(0.9);
+    /* coming from */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+    /* final position */
+  }
+}
