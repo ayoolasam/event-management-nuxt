@@ -69,7 +69,7 @@ tr {
 }
 
 .badge-red {
-  @apply bg-red-300 text-white;
+  @apply bg-red-500 text-white;
 }
 tbody {
   @apply border-gray-200;

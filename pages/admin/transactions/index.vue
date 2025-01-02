@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full  fade-in ctn">
+  <div class="h-full fade-in ctn">
     <h1 class="font-bold text-[25px]">Transactions</h1>
 
     <TableLoader v-if="loading" />
@@ -90,7 +90,7 @@
                     class="w-[200px] absolute top-[5px] actions-menu right-4 bordesign bg-white text-[16px] shadow-md font-normal rounded-xl"
                   >
                     <p
-                      class="w-full rounded-tr-lg rounded-tl-lg flex justify-center gap-4 text-center py-[13px] border-b hover:bg-[#f2f2f2]"
+                      class="w-full rounded-tr-lg rounded-tl-lg flex justify-start px-4 gap-4 text-center py-[13px] border-b hover:bg-[#f2f2f2]"
                       @click="
                         showDetails = true;
                         selectedTransaction = transaction;
@@ -101,7 +101,7 @@
                     </p>
 
                     <p
-                      class="w-full py-[13px] rounded-br-lg rounded-bl-lg gap-[10px] text-center flex justify-center hover:bg-[#f2f2f2]"
+                      class="w-full py-[13px] rounded-br-lg rounded-bl-lg gap-[10px] text-center flex justify-start px-4 hover:bg-[#f2f2f2]"
                     >
                       <i class="ri-delete-bin-line"></i>
                       Delete Transaction

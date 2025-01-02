@@ -51,7 +51,16 @@
               </td>
 
               <td class="">
-                <span class="badge-green badge"> {{ user.status }}</span>
+                <span
+                  class="badge px-[10px]"
+                  :class="{
+                    'badge-green': user.status === 'active',
+
+                    'badge-red': user.status === 'inactive',
+                  }"
+                >
+                  {{ user.status }}</span
+                >
               </td>
 
               <td>
@@ -70,19 +79,28 @@
                   >
                     <NuxtLink :to="`/admin/user-management/${user._id}`">
                       <p
-                        class="w-full rounded-tr-lg rounded-tl-lg flex gap-4 justify-center text-center py-[13px] border-b hover:bg-[#f2f2f2]"
+                        class="w-full rounded-tr-lg rounded-tl-lg flex items-center gap-4 px-4 justify-start text-start py-[13px] border-b hover:bg-[#f2f2f2]"
                       >
                         <i class="ri-eye-line"></i>
                         View Details
                       </p>
                     </NuxtLink>
-
+                    <p
+                      @click="
+                        selectedUser = user;
+                        showDeactivate = true;
+                      "
+                      class="w-full py-[13px] border-b flex items-center gap-4 px-4 justify-start text-center hover:bg-[#f2f2f2]"
+                    >
+                      <i class="ri-user-line"></i>
+                      Deactivate User
+                    </p>
                     <p
                       @click="
                         selectedUser = user;
                         showCta = true;
                       "
-                      class="w-full py-[13px] rounded-br-lg rounded-bl-lg text-center flex gap-4 justify-center hover:bg-[#f2f2f2]"
+                      class="w-full py-[13px] flex items-center gap-4 px-4 justify-start text-center hover:bg-[#f2f2f2]"
                     >
                       <i class="ri-delete-bin-line"></i>
                       Delete User
@@ -95,6 +113,7 @@
         </table>
       </div>
     </div>
+
     <ctaModal
       v-if="showCta"
       @closeModal="showCta = false"
@@ -102,12 +121,21 @@
       :loading="dLoading"
       @delete="deleteUser"
     />
+
+    <Deactivate
+      v-if="showDeactivate"
+      @closeModal="showDeactivate = false"
+      title="User"
+      :loading="dLoading"
+      @deactivate="deactivateUser"
+    />
   </div>
 </template>
 
 <script setup>
 import { MazBtn } from "maz-ui/components";
 import TableLoader from "~/components/TableLoader.vue";
+import Deactivate from "~/components/admin/Deactivate.vue";
 import axios from "axios";
 import { useToast } from "maz-ui";
 const { $apiClient } = useNuxtApp();
@@ -122,6 +150,7 @@ const loading = ref(true);
 
 const dLoading = ref(false);
 const showCta = ref(false);
+const showDeactivate = ref(false);
 const selectedUser = ref({});
 
 const showMore = (index) => {
@@ -172,6 +201,34 @@ const deleteUser = async () => {
       dLoading.value = false;
       toast.success("User Deleted Successfully");
       showCta.value = false;
+      getUsers();
+    }
+  } catch (e) {
+    if (e.message.includes("Network")) {
+      toast.error("Please check your internet connection");
+    } else {
+      toast.error(e.message);
+    }
+  }
+};
+
+const deactivateUser = async () => {
+  dLoading.value = true;
+  try {
+  
+
+    const response = await $apiClient.put(
+      `/api/v1/users/admin/deactivateUser/${selectedUser.value._id}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+    if (response) {
+      dLoading.value = false;
+      toast.success("User Deactivated Successfully");
+      showDeactivate.value = false;
       getUsers();
     }
   } catch (e) {

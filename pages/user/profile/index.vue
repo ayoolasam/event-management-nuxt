@@ -4,7 +4,7 @@
       <div class="rounded-full h-[120px] w-[120px]">
         <div
           v-if="!userStore.user.imageUrl"
-          class="h-full rounded-full bordesign flex items-center justify-center w-full"
+          class="h-full rounded-full bordesign text-[30px] flex items-center justify-center w-full"
         >
           {{ userStore.user.name[0] }}
         </div>

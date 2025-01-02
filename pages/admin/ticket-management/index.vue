@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full ctn  fade-in">
+  <div class="h-full ctn fade-in">
     <h1 class="font-bold text-[25px]">Tickets</h1>
 
     <TableLoader v-if="loading" />
@@ -93,7 +93,7 @@
                     class="w-[200px] absolute top-[5px] actions-menu right-4 bordesign bg-white text-[16px] shadow-md font-normal rounded-xl"
                   >
                     <p
-                      class="w-full rounded-tr-lg rounded-tl-lg flex gap-4 justify-center text-center py-[13px] border-b hover:bg-[#f2f2f2]"
+                      class="w-full rounded-tr-lg rounded-tl-lg flex gap-4 justify-start px-4 text-center py-[13px] border-b hover:bg-[#f2f2f2]"
                       @click="
                         ticketDetails = true;
                         selectedTicket = ticket;
@@ -108,7 +108,7 @@
                         selectedTicket = ticket;
                         showCta = true;
                       "
-                      class="w-full py-[13px] rounded-br-lg rounded-bl-lg text-center flex gap-4 justify-center hover:bg-[#f2f2f2]"
+                      class="w-full py-[13px] rounded-br-lg rounded-bl-lg text-center flex gap-4 justify-start px-4 hover:bg-[#f2f2f2]"
                     >
                       <i class="ri-delete-bin-line"></i>
                       Delete Ticket
