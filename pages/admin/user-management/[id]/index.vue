@@ -1,5 +1,5 @@
 <template>
-  <div class="ctn  fade-in">
+  <div class="ctn fade-in">
     <NuxtLink :to="`/admin/user-management`">
       <div class="flex items-center gap-[10px] mb-8">
         <div
@@ -58,6 +58,17 @@
         <div class="flex gap-[5px] text-subText text-sm">
           <label>Role:</label>
           <span>{{ user.role }}</span>
+        </div>
+        <div class="flex gap-[5px] items-center text-subText text-sm">
+          <label>Status:</label>
+          <span
+            class="badge text-[10px]"
+            :class="{
+              'badge-green': user.status === 'active',
+              'badge-red': user.status === 'inactive',
+            }"
+            >{{ user.status }}</span
+          >
         </div>
       </div>
     </div>

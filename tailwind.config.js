@@ -15,7 +15,10 @@ export default {
         subText: "#9f9e9f",
         tableh: "#364155",
         primary: {
-          DEFAULT: "#1f2833",
+          DEFAULT: "#405",
+          // "#784d92",
+          // "#3d52a0",
+          // "#1f2833",
           light: "#81C784", // Lighter shade
           dark: "#388E3C", // Darker shade
         },

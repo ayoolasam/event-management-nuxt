@@ -75,7 +75,7 @@
 
               <td>
                 <span class="font-normal text-gray-600">{{
-                  transaction.amount
+                  formatNumber(transaction.amount)
                 }}</span>
               </td>
               <td>{{ formatDate(transaction.transactionDate) }}</td>
@@ -158,6 +158,10 @@ const formatDate = (dateString) => {
     day: "2-digit",
   });
 };
+
+function formatNumber(number) {
+  return new Intl.NumberFormat("en-US").format(number);
+}
 
 const getTransactions = async () => {
   try {

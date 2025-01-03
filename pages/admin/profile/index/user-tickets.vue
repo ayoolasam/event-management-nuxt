@@ -29,6 +29,11 @@
               <th>Actions</th>
             </tr>
           </thead>
+          <tbody v-if="!loading && tickets.length === 0">
+            <tr>
+              <td class="text-center" colspan="8">No Tickets Found</td>
+            </tr>
+          </tbody>
           <tbody>
             <tr v-for="(ticket, index) in tickets" :key="index">
               <td class="text-gray-600 text-md capitalize">
