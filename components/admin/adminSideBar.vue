@@ -9,7 +9,11 @@
     <div class="arrow">
       <div
         @click="isCollapsed"
-        class="absolute arrow-box shadow-3xl top-4 right-4 bg-white flex items-center justify-center h-[35px] w-[35px] rounded-full hover:scale-125 transition-all duration-300"
+        :class="{
+          'top-4 right-4': !collapse,
+          'top-4 left-8': collapse,
+        }"
+        class="absolute arrow-box shadow-3xl top-4 right-4 bg-white flex items-center justify-center h-[35px] w-[35px] rounded-full hover:scale-125 transition-all duration-500"
       >
         <i
           v-if="!collapse"
@@ -23,20 +27,22 @@
     </div>
     <div
       :class="{
-        'mt-12 px-[5px]': collapse,
+        '': collapse,
       }"
-      class="w-full flex items-center justify-center transition-all duration-700"
+      class="w-full h-[100px] flex items-center justify-center transition-all duration-700"
     >
       <img
         :class="{
-          'w-[26px] h-[25px]': collapse,
+          'w-12 h-12': collapse,
         }"
         class="w-[70px] h-[40px] image-logo"
         src="../../assets/images/logo-white.png"
         alt="logo"
       />
     </div>
-    <div class="link-section overflow-y-auto no-scrollbar h-[65%] transition-all duration-1000">
+    <div
+      class="link-section overflow-y-auto no-scrollbar h-[65%] transition-all duration-1000"
+    >
       <ul class="transition-all duration-1000">
         <li
           :class="{
@@ -113,7 +119,7 @@ const sideBarLinks = ref([
   },
   {
     text: "Transactions",
-    icon: "ri-settings-3-line",
+    icon: "ri-bank-card-line",
     to: { name: "admin-transactions" },
   },
   {
@@ -127,7 +133,7 @@ const sideBarLinks = ref([
 const options = ref([
   {
     text: "Profile",
-    icon: "ri-feedback-line",
+    icon: "ri-user-line",
     to: { name: "admin-profile" },
   },
   // {

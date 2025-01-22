@@ -12,7 +12,7 @@
       </div>
 
       <div
-        class="flex-1 bg-white rounded-tr-lg justify-center rounded-br-lg flex py-8"
+        class="flex-1 bg-white xl:rounded-tr-lg justify-center xl:rounded-br-lg  flex py-8"
       >
         <div class="flex flex-col px-8 w-full">
           <div class="text-center">

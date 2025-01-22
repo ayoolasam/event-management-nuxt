@@ -1,5 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
+  app: {
+    head: {
+      title: 'Event Managements', // Optional: Update the title
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/webp',
+          href: './assets/images/favicon.webp', // Ensure the path matches where you placed the filea
+        },
+      ],
+    },
+  },
+
 runtimeConfig:{
   public: {
     // apiBaseUrl:'http://localhost:5000'

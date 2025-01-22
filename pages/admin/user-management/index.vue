@@ -52,7 +52,7 @@
 
               <td class="">
                 <span
-                  class="badge px-[10px]"
+                  class="badge"
                   :class="{
                     'badge-green': user.status === 'active',
 
